@@ -1,5 +1,5 @@
 from pyspark import SparkContext
-sc = SparkContext("local", "count app")
+sc = SparkContext("local", "Filter app")
 words = sc.parallelize (
    ["scala", 
    "java", 
@@ -10,6 +10,7 @@ words = sc.parallelize (
    "pyspark",
    "pyspark and spark"]
 )
-counts = words.count()
-print("Number of elements in RDD -> %i" % (counts))
+words_filter = words.filter(lambda x: 'spark' in x)
+filtered = words_filter.collect()
+print("Fitered RDD -> %s" % (filtered))
 

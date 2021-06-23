@@ -1,5 +1,5 @@
 from pyspark import SparkContext
-sc = SparkContext("local", "count app")
+sc = SparkContext("local", "ForEach app")
 words = sc.parallelize (
    ["scala", 
    "java", 
@@ -10,6 +10,5 @@ words = sc.parallelize (
    "pyspark",
    "pyspark and spark"]
 )
-counts = words.count()
-print("Number of elements in RDD -> %i" % (counts))
-
+def f(x): print(x)
+fore = words.foreach(f) 

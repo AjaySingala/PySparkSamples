@@ -1,5 +1,5 @@
 from pyspark import SparkContext
-sc = SparkContext("local", "count app")
+sc = SparkContext("local", "Collect app")
 words = sc.parallelize (
    ["scala", 
    "java", 
@@ -10,6 +10,6 @@ words = sc.parallelize (
    "pyspark",
    "pyspark and spark"]
 )
-counts = words.count()
-print("Number of elements in RDD -> %i" % (counts))
+coll = words.collect()
+print("Elements in RDD -> %s" % (coll))
 
