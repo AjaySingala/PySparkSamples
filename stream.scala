@@ -2,9 +2,9 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{col, from_json}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
-object SparkStreamingConsumerKafkaJson {
+//object SparkStreamingConsumerKafkaJson {
 
-  def main(args: Array[String]): Unit = {
+//  def main(args: Array[String]): Unit = {
 
     val spark: SparkSession = SparkSession.builder()
       .master("local[3]")
@@ -15,7 +15,7 @@ object SparkStreamingConsumerKafkaJson {
 
     val df = spark.readStream
         .format("kafka")
-        .option("kafka.bootstrap.servers", "localhost:9092")
+        .option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")
         .option("subscribe", "json_topic")
         .option("startingOffsets", "earliest") // From starting
         .load()
@@ -61,5 +61,5 @@ object SparkStreamingConsumerKafkaJson {
       .awaitTermination()
 
 
-  }
-}
+//  }
+//}
