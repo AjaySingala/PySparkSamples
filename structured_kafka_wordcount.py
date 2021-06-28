@@ -17,6 +17,8 @@ if __name__ == "__main__":
     topics = sys.argv[3]
 
     spark = SparkSession.builder.appName("StructuredKafkaWordCount").getOrCreate()
+    sparkContext = spark.sparkContext
+    sparkContext.setLogLevel("ERROR")
 
     # Create DataSet representing the stream of input lines from kafka
     #lines = spark.readStream.format("kafka").option("kafka.bootstrap.servers", bootstrapServers).option(subscribeType, topics).load().selectExpr("CAST(value AS STRING)")
@@ -40,3 +42,5 @@ if __name__ == "__main__":
     query = wordCounts.writeStream.outputMode('complete').format('console').start()
 
     query.awaitTermination()
+    query.stop()
+
