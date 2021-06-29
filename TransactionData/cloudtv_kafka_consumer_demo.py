@@ -4,9 +4,9 @@ import time
 import pandas as pd
 
 KAFKA_CONSUMER_GROUP_NAME_CONS = "test_consumer_group"
-KAFKA_TOPIC_NAME_CONS = "testtopic"
+KAFKA_TOPIC_NAME_CONS = "test-topic"
 KAFKA_OUTPUT_TOPIC_NAME_CONS = "outputtopic"
-KAFKA_BOOTSTRAP_SERVERS_CONS = '34.73.102.250:9092'
+KAFKA_BOOTSTRAP_SERVERS_CONS = 'localhost:9092'
 
 if __name__ == "__main__":
 

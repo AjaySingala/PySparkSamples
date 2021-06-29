@@ -4,8 +4,8 @@ import time
 from json import dumps
 import random
 
-KAFKA_TOPIC_NAME_CONS = "testtopic"
-KAFKA_BOOTSTRAP_SERVERS_CONS = '34.73.102.250:9092'
+KAFKA_TOPIC_NAME_CONS = "test-topic"
+KAFKA_BOOTSTRAP_SERVERS_CONS = 'localhost:9092'
 
 if __name__ == "__main__":
     print("Kafka Producer Application Started ... ")
