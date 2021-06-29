@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     # Define a schema for the orders data
     # order_id,order_product_name,order_card_type,order_amount,order_datetime,order_country_name,order_city_name,order_ecommerce_website_name
-    orders_schema_avro = open('orders.avsc', mode='r').read()
+    orders_schema_avro = open('/home/hdoop/SparkSamples/OrderData/orders.avsc', mode='r').read()
 
     # 8,Wrist Band,MasterCard,137.13,2020-10-21 18:37:02,United Kingdom,London,www.datamaking.com
     orders_df2 = orders_df1\

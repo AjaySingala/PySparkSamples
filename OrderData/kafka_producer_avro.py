@@ -35,7 +35,7 @@ if __name__ == "__main__":
     ecommerce_website_name_list = ["www.datamaking.com", "www.amazon.com", "www.flipkart.com", "www.snapdeal.com", "www.ebay.com"]
 
     # Path to user.avsc avro schema
-    avro_schema_path = "orders.avsc"
+    avro_schema_path = "/home/hdoop/SparkSamples/OrderData/orders.avsc"
     avro_orders_schema = schema.Parse(open(avro_schema_path).read())
 
     message_list = []
