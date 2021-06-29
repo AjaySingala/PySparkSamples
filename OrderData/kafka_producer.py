@@ -27,7 +27,7 @@ if __name__ == "__main__":
                                    "Beijing,China", "Rome,Italy", "Berlin,Germany", "Ottawa,Canada",
                                    "London,United Kingdom", "Jerusalem,Israel", "Bangkok,Thailand",
                                    "Chennai,India", "Bangalore,India", "Mumbai,India", "Pune,India",
-                                   "New Delhi,Inida", "Hyderabad,India", "Kolkata,India", "Singapore,Singapore"]
+                                   "New Delhi,India", "Hyderabad,India", "Kolkata,India", "Singapore,Singapore"]
 
     ecommerce_website_name_list = ["www.datamaking.com", "www.amazon.com", "www.flipkart.com", "www.snapdeal.com", "www.ebay.com"]
 
