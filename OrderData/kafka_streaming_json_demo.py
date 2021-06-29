@@ -10,7 +10,6 @@ kafka_topic_name = "test-topic"
 kafka_bootstrap_servers = 'localhost:9092'
 
 if __name__ == "__main__":
-    print("Welcome to DataMaking !!!")
     print("Stream Data Processing Application Started ...")
     print(time.strftime("%Y-%m-%d %H:%M:%S"))
 
