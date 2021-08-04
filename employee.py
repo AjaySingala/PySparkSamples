@@ -12,19 +12,15 @@ spark = SparkSession.builder \
 #df = spark.read.json("resources/employee.json")
 
 # Read from local.
-df = spark.read.json("file:///home/maria_dev/files/employee.json")
+df = spark.read.json("file:///home/maria_dev/SparkSamples/resources/employee.json")
 
 df.printSchema()
-df.show(False)
+df.show()
 
-# read multiline json file.
-multiline_df = spark.read.option("multiline","true").json("resources/employee_m.json")
-multiline_df.show(False)    
-
-# read multiple files.
-df2 = spark.read.json("resources/e1.json",  "resources/e2.json")
-df2.show(False)
+# # read multiline json file.
+# multiline_df = spark.read.option("multiline","true").json("file:///home/maria_dev/SparkSamples/resources/multiline_employee.json")
+# multiline_df.show()    
 
 # # readAll files in a folder.
-# df2 = spark.read.json(”somefolder")
-# df2.show(False)
+#df2 = spark.read.json("file:///home/maria_dev/SparkSamples/resources/e?.json")
+#df2.show()
