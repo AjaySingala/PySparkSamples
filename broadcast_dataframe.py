@@ -18,6 +18,12 @@ df = spark.createDataFrame(data = data, schema = columns)
 df.printSchema()
 df.show(truncate=False)
 
+print("States...")
+print(states.keys())
+print("Broadcast States...")
+print(broadcastStates.value)
+print(broadcastStates.value.keys())
+
 def state_convert(code):
     return broadcastStates.value[code]
 
@@ -25,4 +31,7 @@ result = df.rdd.map(lambda x: (x[0],x[1],x[2],state_convert(x[3]))).toDF(columns
 result.show(truncate=False)
 
 # Broadcast variable on filter
-filteDf= df.where((df['state'].isin(broadcastStates.value)))
+#filteDf= df.where((df['state'].isin("FL", "CA")))
+#filteDf= df.where((df['state'].isin(states.keys())))
+#filteDf= df.where((df['state'].isin(broadcastStates.value)))
+filteDf= df.where((df['state'].isin(broadcastStates.value.keys())))

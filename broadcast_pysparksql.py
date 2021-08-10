@@ -18,4 +18,6 @@ rdd = spark.sparkContext.parallelize(data)
 def state_convert(code):
     return broadcastStates.value[code]
 
+print("result...")
 result = rdd.map(lambda x: (x[0],x[1],x[2],state_convert(x[3]))).collect()
+result.show(truncate=False)
