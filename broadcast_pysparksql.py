@@ -20,4 +20,5 @@ def state_convert(code):
 
 print("result...")
 result = rdd.map(lambda x: (x[0],x[1],x[2],state_convert(x[3]))).collect()
+print(result)
 result.show(truncate=False)
