@@ -11,6 +11,7 @@ spark = SparkSession \
 
 # Creating Dataframes.
 # spark is an existing SparkSession
+# Path must exist in HDFS.
 df = spark.read.json("resources/spark_examples/people.json")
 # Displays the content of the DataFrame to stdout
 df.show()
