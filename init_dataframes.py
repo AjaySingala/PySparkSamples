@@ -11,18 +11,18 @@ spark = SparkSession \
 
 # Creating Dataframes.
 # spark is an existing SparkSession
-df = spark.read.json("examples/src/main/resources/people.json")
+df = spark.read.json("resources/spark_examples/people.json")
 # Displays the content of the DataFrame to stdout
 df.show()
 
 # Untyped Dataset Operations (aka DataFrame Operations).
 # DataFrames are just Dataset of Rows in Scala and Java API. 
-# These operations are also referred as “untyped transformations” in contrast to “typed transformations” 
+# These operations are also referred as "untyped transformations" in contrast to “typed transformations" 
 # that come with strongly typed Scala/Java Datasets.
 #
-# In Python, it’s possible to access a DataFrame’s columns either by attribute (df.age) or by indexing (df['age']). 
+# In Python, it's possible to access a DataFrame's columns either by attribute (df.age) or by indexing (df['age']). 
 # While the former is convenient for interactive data exploration, users are highly encouraged to use the latter form, 
-# which is future proof and won’t break with column names that are also attributes on the DataFrame class.
+# which is future proof and won't break with column names that are also attributes on the DataFrame class.
 #
 # spark, df are from the previous example
 # Print the schema in a tree format

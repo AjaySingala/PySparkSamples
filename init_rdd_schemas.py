@@ -31,7 +31,7 @@ spark = SparkSession \
 sc = spark.sparkContext
 
 # Load a text file and convert each line to a Row.
-lines = sc.textFile("examples/src/main/resources/people.txt")
+lines = sc.textFile("resources/spark_examples/people.txt")
 parts = lines.map(lambda l: l.split(","))
 people = parts.map(lambda p: Row(name=p[0], age=int(p[1])))
 
@@ -55,7 +55,7 @@ from pyspark.sql.types import StringType, StructType, StructField
 sc = spark.sparkContext
 
 # Load a text file and convert each line to a Row.
-lines = sc.textFile("examples/src/main/resources/people.txt")
+lines = sc.textFile("resources/spark_examples/people.txt")
 parts = lines.map(lambda l: l.split(","))
 # Each line is converted to a tuple.
 people = parts.map(lambda p: (p[0], p[1].strip()))
