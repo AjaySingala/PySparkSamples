@@ -17,7 +17,7 @@ df.show()
 
 # Untyped Dataset Operations (aka DataFrame Operations).
 # DataFrames are just Dataset of Rows in Scala and Java API. 
-# These operations are also referred as "untyped transformations" in contrast to “typed transformations" 
+# These operations are also referred as "untyped transformations" in contrast to "typed transformations" 
 # that come with strongly typed Scala/Java Datasets.
 #
 # In Python, it's possible to access a DataFrame's columns either by attribute (df.age) or by indexing (df['age']). 
