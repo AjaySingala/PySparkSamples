@@ -25,8 +25,8 @@ from pyspark.sql import Row
 spark = SparkSession \
     .builder \
     .appName("Python Spark SQL Schema basic example") \
-    .config("spark.some.config.option", "some-value") \
     .getOrCreate()
+#    .config("spark.some.config.option", "some-value") \
 
 sc = spark.sparkContext
 

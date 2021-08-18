@@ -29,3 +29,7 @@ deptSchema = StructType([
 deptDF1 = spark.createDataFrame(rdd, schema = deptSchema)
 deptDF1.printSchema()
 deptDF1.show(truncate=False)
+# deptDF1.show(truncate=10)
+# deptDF1.show(truncate=False, n=2)
+# deptDF1.show(vertical=False)  # Default.
+# deptDF1.show(vertical=True)
