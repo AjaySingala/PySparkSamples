@@ -3,7 +3,7 @@ import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col,sum,avg,max
 
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 simpleData = [("James","Sales","NY",90000,34,10000),
     ("Michael","Sales","NY",86000,56,20000),
@@ -21,15 +21,18 @@ df = spark.createDataFrame(data=simpleData, schema = schema)
 df.printSchema()
 df.show(truncate=False)
 
+print("groupy by department, sum salary...")
 df.groupBy("department").sum("salary").show(truncate=False)
 
+print("groupy by department, count...")
 df.groupBy("department").count().show(truncate=False)
 
-
+print("groupy by department and state, sum salary and bonus...")
 df.groupBy("department","state") \
     .sum("salary","bonus") \
    .show(truncate=False)
 
+print("groupy by department, average and sum and max salary and bonus...")
 df.groupBy("department") \
     .agg(sum("salary").alias("sum_salary"), \
          avg("salary").alias("avg_salary"), \
@@ -38,6 +41,7 @@ df.groupBy("department") \
      ) \
     .show(truncate=False)
     
+print("groupy by department, sum, avg of salary, sum, max of bonus where sum_bonus > 50000...")
 df.groupBy("department") \
     .agg(sum("salary").alias("sum_salary"), \
       avg("salary").alias("avg_salary"), \

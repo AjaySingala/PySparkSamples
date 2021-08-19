@@ -5,7 +5,7 @@ from pyspark.sql.types import *
 if __name__ == "__main__":
     spark = SparkSession.builder()
       .master("local[2]")
-      .appName("SparkByExample")
+      .appName("ajaysingala")
       .getOrCreate()
 
     spark.sparkContext.setLogLevel("ERROR")

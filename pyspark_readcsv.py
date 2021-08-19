@@ -5,7 +5,7 @@ from pyspark.sql.types import StructType,StructField, StringType, IntegerType
 from pyspark.sql.types import ArrayType, DoubleType, BooleanType
 from pyspark.sql.functions import col,array_contains
 
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 df = spark.read.csv("/tmp/resources/zipcodes.csv")
 

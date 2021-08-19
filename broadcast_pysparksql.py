@@ -2,7 +2,7 @@
 import pyspark
 from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 states = {"NY":"New York", "CA":"California", "FL":"Florida"}
 broadcastStates = spark.sparkContext.broadcast(states)

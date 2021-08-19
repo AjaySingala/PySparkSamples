@@ -1,6 +1,6 @@
 # pyspark_foreach.py
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 # Create a dataframe.
 data = [('James','Smith','M',30),('Anna','Rose','F',41),
@@ -54,20 +54,20 @@ df.foreach(lambda x:
     print("Data ==>"+x["firstname"]+","+x["lastname"]+","+x["gender"]+","+str(x["salary"]*2))
     ) 
 
-# Using pandas
-import pandas as pd
-spark.conf.set("spark.sql.execution.arrow.enabled", "true")
-pandasDF = df.toPandas()
-for index, row in pandasDF.iterrows():
-    print(row['firstname'], row['gender'])
+# # Using pandas
+# import pandas as pd
+# spark.conf.set("spark.sql.execution.arrow.enabled", "true")
+# pandasDF = df.toPandas()
+# for index, row in pandasDF.iterrows():
+#     print(row['firstname'], row['gender'])
 
-# Collect Data As List and Loop Through.
-# Collect the data to Python List
-dataCollect = df.collect()
-for row in dataCollect:
-    print(row['firstname'] + "," +row['lastname'])
+# # Collect Data As List and Loop Through.
+# # Collect the data to Python List
+# dataCollect = df.collect()
+# for row in dataCollect:
+#     print(row['firstname'] + "," +row['lastname'])
 
-#Using toLocalIterator()
-dataCollect=df.rdd.toLocalIterator()
-for row in dataCollect:
-    print(row['firstname'] + "," +row['lastname'])
+# #Using toLocalIterator()
+# dataCollect=df.rdd.toLocalIterator()
+# for row in dataCollect:
+#     print(row['firstname'] + "," +row['lastname'])

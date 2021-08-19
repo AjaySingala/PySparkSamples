@@ -4,7 +4,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType,StructField, StringType, IntegerType, ArrayType
 from pyspark.sql.functions import col,array_contains
 
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 arrayStructureData = [
         (("James","","Smith"),["Java","Scala","C++"],"OH","M"),
@@ -25,7 +25,6 @@ arrayStructureSchema = StructType([
          StructField('state', StringType(), True),
          StructField('gender', StringType(), True)
          ])
-
 
 df = spark.createDataFrame(data = arrayStructureData, schema = arrayStructureSchema)
 df.printSchema()
@@ -48,3 +47,17 @@ df.filter(array_contains(df.languages,"Java")) \
 
 df.filter(df.name.lastname == "Williams") \
     .show(truncate=False) 
+
+## more filters
+# df.filter("gender != 'M'").show() 
+# df.filter("gender <> 'M'").show() 
+
+# states = ["OH", "NY"]
+# df.filter(df.state.isin(states)).show()
+
+# # NOT IS IN.
+# df.filter(df.state.isin(states) == False).show()
+# df.filter(~df.state.isin(states)).show()
+
+# df.filter(df.name.firstname.contains("Tom")).show()
+# df.filter(df.name.firstname.like("Tom%")).show()

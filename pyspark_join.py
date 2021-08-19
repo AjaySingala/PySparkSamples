@@ -3,7 +3,7 @@ import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 emp = [(1,"Smith",-1,"2018","10","M",3000), \
     (2,"Rose",1,"2010","20","M",4000), \
@@ -18,7 +18,6 @@ empColumns = ["emp_id","name","superior_emp_id","year_joined", \
 empDF = spark.createDataFrame(data=emp, schema = empColumns)
 empDF.printSchema()
 empDF.show(truncate=False)
-
 
 dept = [("Finance",10), \
     ("Marketing",20), \

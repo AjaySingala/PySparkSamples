@@ -2,7 +2,7 @@
 import pyspark
 from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 sparkContext=spark.sparkContext
 
 rdd=sparkContext.parallelize([1,2,3,4,5])

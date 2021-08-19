@@ -1,20 +1,20 @@
 # pyspark_map.py
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 data = ["Project",
-"Gutenberg’s",
-"Alice’s",
+"Gutenberg's",
+"Alice's",
 "Adventures",
 "in",
 "Wonderland",
 "Project",
-"Gutenberg’s",
+"Gutenberg's",
 "Adventures",
 "in",
 "Wonderland",
 "Project",
-"Gutenberg’s"]
+"Gutenberg's"]
 
 rdd=spark.sparkContext.parallelize(data)
 
@@ -22,6 +22,7 @@ rdd2=rdd.map(lambda x: (x,1))
 for element in rdd2.collect():
     print(element)
     
+# map() with DF.
 data = [('James','Smith','M',30),
   ('Anna','Rose','F',41),
   ('Robert','Williams','M',62), 
@@ -31,6 +32,7 @@ columns = ["firstname","lastname","gender","salary"]
 df = spark.createDataFrame(data=data, schema = columns)
 df.show()
 
+# Referring Column Names by index.
 rdd2=df.rdd.map(lambda x: 
     (x[0]+","+x[1],x[2],x[3]*2)
     )  

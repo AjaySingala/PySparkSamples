@@ -7,7 +7,7 @@ from pyspark.sql.functions import first, last, kurtosis, min, mean, skewness
 from pyspark.sql.functions import stddev, stddev_samp, stddev_pop, sumDistinct
 from pyspark.sql.functions import variance,var_samp,  var_pop
 
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 simpleData = [("James", "Sales", 3000),
     ("Michael", "Sales", 4600),

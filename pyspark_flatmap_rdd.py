@@ -1,6 +1,6 @@
 # pyspark_flatmap_rdd.py
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
 
 data = ["Project Gutenberg’s",
         "Alice’s Adventures in Wonderland",

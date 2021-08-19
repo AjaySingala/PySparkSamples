@@ -1,7 +1,7 @@
 # pyspark_flatmap_dataframe.py
 import pyspark
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName('pyspark-by-examples').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala').getOrCreate()
 
 arrayData = [
         ('James',['Java','Scala'],{'hair':'black','eye':'brown'}),
