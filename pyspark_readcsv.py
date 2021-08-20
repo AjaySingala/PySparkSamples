@@ -6,17 +6,19 @@ from pyspark.sql.types import ArrayType, DoubleType, BooleanType
 from pyspark.sql.functions import col,array_contains
 
 spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")     # Default is INFO.
 
-df = spark.read.csv("/tmp/resources/zipcodes.csv")
-
+df = spark.read.csv("resources/zipcodes.csv")
 df.printSchema()
 
 df2 = spark.read.option("header",True) \
-     .csv("/tmp/resources/zipcodes.csv")
+     .csv("resources/zipcodes.csv")
+print("Read csv with header=true...")
 df2.printSchema()
    
 df3 = spark.read.options(header='True', delimiter=',') \
-  .csv("/tmp/resources/zipcodes.csv")
+  .csv("resources/zipcodes.csv")
+print("Read csv with header=true and delimiter=','...")
 df3.printSchema()
 
 schema = StructType() \
@@ -44,8 +46,11 @@ schema = StructType() \
 df_with_schema = spark.read.format("csv") \
       .option("header", True) \
       .schema(schema) \
-      .load(/tmp/resources/zipcodes.csv")
+      .load("resources/zipcodes.csv")
+print("Read csv with schema...")
 df_with_schema.printSchema()
+df_with_schema.show()
 
+print("Writing csv to /tmp/spark_output/zipcodes123...")
 df2.write.option("header",True) \
  .csv("/tmp/spark_output/zipcodes123")
