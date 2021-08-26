@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
-KAFKA_TOPIC_NAME_CONS = "test-topic"
+KAFKA_TOPIC_NAME_CONS = "txn-topic"
 KAFKA_OUTPUT_TOPIC_NAME_CONS = "outputtopic"
 KAFKA_BOOTSTRAP_SERVERS_CONS = 'localhost:9092'
 
@@ -75,6 +75,7 @@ if __name__ == "__main__":
         .format("kafka") \
         .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS_CONS) \
         .option("topic", KAFKA_OUTPUT_TOPIC_NAME_CONS) \
+        .option("failOnDataLoss", "false") \
         .trigger(processingTime='1 seconds') \
         .outputMode("update") \
         .option("checkpointLocation", "file:///home/hdoop/tmp/py_checkpoint") \

@@ -4,7 +4,7 @@ import time
 from json import dumps
 import random
 
-KAFKA_TOPIC_NAME_CONS = "test-topic"
+KAFKA_TOPIC_NAME_CONS = "txn-topic"
 KAFKA_BOOTSTRAP_SERVERS_CONS = 'localhost:9092'
 
 if __name__ == "__main__":

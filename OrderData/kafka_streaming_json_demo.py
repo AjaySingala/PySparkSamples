@@ -8,6 +8,7 @@ import time
 
 kafka_topic_name = "test-topic"
 kafka_bootstrap_servers = 'localhost:9092'
+#kafka_bootstrap_servers = 'sandbox-hdp.hortonworks.com:6667'
 
 if __name__ == "__main__":
     print("Stream Data Processing Application Started ...")
