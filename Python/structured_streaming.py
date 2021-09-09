@@ -38,7 +38,7 @@ if __name__ == "__main__":
       .format("kafka")
       .outputMode("append")
       .option("kafka.bootstrap.servers", " localhost:9092")
-      .option("topic", "josn_topic")
+      .option("topic", "json_output_topic")
       .start()
       .awaitTermination()
 

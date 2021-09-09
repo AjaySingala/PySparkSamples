@@ -4,12 +4,19 @@ import org.apache.spark._
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._ // not necessary since Spark 1.3
 
-object NetworkWordCount {
-  def main(args: Array[String]) {
-    if (args.length < 2) {
-      System.err.println("Usage: NetworkWordCount <hostname> <port>")
-      System.exit(1)
-    }
+/*
+ * To run this on your local machine, you need to first run a Netcat server
+ *    `$ nc -lk 9999`
+ * and then run the example
+ *    ON HDP: spark-shell -i networkwordcount.scala
+*/
+
+// object NetworkWordCount {
+//   def main(args: Array[String]) {
+//     if (args.length < 2) {
+//       System.err.println("Usage: NetworkWordCount <hostname> <port>")
+//       System.exit(1)
+//     }
 
     // Create a local StreamingContext with two working thread and batch interval of 1 second.
     // The master requires 2 cores to prevent from a starvation scenario.
@@ -36,5 +43,5 @@ object NetworkWordCount {
     ssc.start() // Start the computation
     ssc.awaitTermination() // Wait for the computation to terminate
     ssc.stop() // Stop the computation.
-  }
-}
+//   }
+// }

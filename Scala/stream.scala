@@ -1,65 +1,53 @@
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.{col, from_json}
+//import org.apache.spark.sql.functions.{col, from_json}
+import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
 //object SparkStreamingConsumerKafkaJson {
 
 //  def main(args: Array[String]): Unit = {
 
-    val spark: SparkSession = SparkSession.builder()
-      .master("local[3]")
-      .appName("SparkByExample")
-      .getOrCreate()
-
+    val spark: SparkSession = SparkSession.builder().master("local[3]").appName("ajaysingala").getOrCreate()
+    
+    import spark.implicits._
+    
     spark.sparkContext.setLogLevel("ERROR")
 
-    val df = spark.readStream
-        .format("kafka")
-        .option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")
-        .option("subscribe", "json_topic")
-        .option("startingOffsets", "earliest") // From starting
-        .load()
+    // Read from start.
+    val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667").option("subscribe", "json_topic").option("startingOffsets", "earliest").load()
 
-    df.printSchema()
+    //df.printSchema()
 
-    //df.show(false)
-    //org.apache.spark.sql.AnalysisException: Queries with streaming sources must be executed with writeStream.start();;
+    val schema = new StructType().add("id",IntegerType).add("firstname",StringType).add("middlename",StringType).add("lastname",StringType).add("dob_year",IntegerType).add("dob_month",IntegerType).add("gender",StringType).add("salary",IntegerType)
 
-    val schema = new StructType()
-      .add("id",IntegerType)
-      .add("firstname",StringType)
-      .add("middlename",StringType)
-      .add("lastname",StringType)
-      .add("dob_year",IntegerType)
-      .add("dob_month",IntegerType)
-      .add("gender",StringType)
-      .add("salary",IntegerType)
-
-    val person = df.selectExpr("CAST(value AS STRING)")
-    .select(from_json(col("value"), schema).as("data"))
-      .select("data.*")
+    // Since the value is in binary, first we need to convert the binary value to String using selectExpr().
+    // Also apply the schema.
+    val personDF = df.selectExpr("CAST(value AS STRING)").select(from_json(col("value"), schema).as("data")).select("data.*")
 
     /**
      *uncomment below code if you want to write it to console for testing.
      */
-//    val query = person.writeStream
-//      .format("console")
-//      .outputMode("append")
-//      .start()
-//      .awaitTermination()
+   val query = personDF.writeStream.format("console").outputMode("append").option("truncate", "false").start()
+      //.awaitTermination()
+
 
     /**
       *uncomment below code if you want to write it to kafka topic.
       */
-    df.selectExpr("CAST(id AS STRING) AS key", "to_json(struct(*)) AS value")
-      .writeStream
-      .format("kafka")
+   val dfOut = personDF.selectExpr("CAST(id AS STRING) AS key", "to_json(struct(*)) AS value").alias("value")
+   dfOut.printSchema()
+   dfOut
+      .writeStream.format("kafka")
       .outputMode("append")
       .option("kafka.bootstrap.servers", "localhost:9092")
-      .option("topic", "json_topic")
+      .option("checkpointLocation", "/tmp/kafka_checkpoints")
+      .option("topic", "json_output_topic")
       .start()
-      .awaitTermination()
+      //.awaitTermination()
 
-
+   dfOut.createOrReplaceTempView("Person")
+   val dfSQL =  spark.sql("SELECT * FROM PERSON")
+   val dfJSON = dfSQL.toJSON
+   dfJSON.writeStream.format("console").outputMode("append").option("truncate", "false").start()
 //  }
 //}
