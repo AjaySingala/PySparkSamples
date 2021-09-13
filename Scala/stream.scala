@@ -1,3 +1,4 @@
+// stream.scala
 import org.apache.spark.sql.SparkSession
 //import org.apache.spark.sql.functions.{col, from_json}
 import org.apache.spark.sql.functions._
@@ -7,39 +8,52 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
 //  def main(args: Array[String]): Unit = {
 
-    val spark: SparkSession = SparkSession.builder().master("local[3]").appName("ajaysingala").getOrCreate()
-    
-    import spark.implicits._
-    
-    spark.sparkContext.setLogLevel("ERROR")
+   val spark: SparkSession = SparkSession.builder().master("local[3]").appName("ajaysingala").getOrCreate()
+   
+   import spark.implicits._
+   
+   spark.sparkContext.setLogLevel("ERROR")
 
-    // Read from start.
-    val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667").option("subscribe", "json_topic").option("startingOffsets", "earliest").load()
+   // Read from start.
+   // // Custom Ubuntu VM.
+   // val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "localhost:9092").option("subscribe", "json_topic").option("startingOffsets", "earliest").load()
+   // Hortonworks HDP VM.
+   val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667").option("subscribe", "json_topic").option("startingOffsets", "earliest").load()
 
-    //df.printSchema()
+   //df.printSchema()
 
-    val schema = new StructType().add("id",IntegerType).add("firstname",StringType).add("middlename",StringType).add("lastname",StringType).add("dob_year",IntegerType).add("dob_month",IntegerType).add("gender",StringType).add("salary",IntegerType)
+   val schema = new StructType().add("id",IntegerType).add("firstname",StringType).add("middlename",StringType).add("lastname",StringType).add("dob_year",IntegerType).add("dob_month",IntegerType).add("gender",StringType).add("salary",IntegerType)
 
-    // Since the value is in binary, first we need to convert the binary value to String using selectExpr().
-    // Also apply the schema.
-    val personDF = df.selectExpr("CAST(value AS STRING)").select(from_json(col("value"), schema).as("data")).select("data.*")
+   // Since the value is in binary, first we need to convert the binary value to String using selectExpr().
+   // Also apply the schema.
+   val personDF = df.selectExpr("CAST(value AS STRING)").select(from_json(col("value"), schema).as("data")).select("data.*")
 
-    /**
-     *uncomment below code if you want to write it to console for testing.
-     */
+   /**
+    *uncomment below code if you want to write it to console for testing.
+   */
    val query = personDF.writeStream.format("console").outputMode("append").option("truncate", "false").start()
       //.awaitTermination()
 
 
-    /**
-      *uncomment below code if you want to write it to kafka topic.
-      */
+   /**
+    * uncomment below code if you want to write it to kafka topic.
+   */
    val dfOut = personDF.selectExpr("CAST(id AS STRING) AS key", "to_json(struct(*)) AS value").alias("value")
    dfOut.printSchema()
+   // // Custom Ubuntu VM.
+   // dfOut
+   //    .writeStream.format("kafka")
+   //    .outputMode("append")
+   //    .option("kafka.bootstrap.servers", "localhost:9092")
+   //    .option("checkpointLocation", "/tmp/kafka_checkpoints")
+   //    .option("topic", "json_output_topic")
+   //    .start()
+   //    //.awaitTermination()
+   // Hortonworks HDP VM.
    dfOut
       .writeStream.format("kafka")
       .outputMode("append")
-      .option("kafka.bootstrap.servers", "localhost:9092")
+      .option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")
       .option("checkpointLocation", "/tmp/kafka_checkpoints")
       .option("topic", "json_output_topic")
       .start()
