@@ -7,14 +7,15 @@ object SparkStreamSocketSource {
   def main(args: Array[String]): Unit = {
 
     // Create Spark Session
-    val spark = SparkSession
-      .builder()
-      .master("local")
-      .appName("Socket Source")
-      .getOrCreate()
+    // val sparkSession = SparkSession
+    //   .builder()
+    //   .master("local")
+    //   .appName("Socket Source")
+    //   .getOrCreate()
+    val sparkSession = SparkSession.builder.appName("Socket Source").config("spark.master", "local[*]").getOrCreate()
 
     // Set Spark logging level to ERROR.
-    spark.sparkContext.setLogLevel("ERROR")
+    sparkSession.sparkContext.setLogLevel("ERROR")
 
     // Create Streaming DataFrame
     // Define host and port number to Listen.
@@ -22,7 +23,7 @@ object SparkStreamSocketSource {
     val port = "9999"
 
     // Create Streaming DataFrame by reading data from socket.
-    val initDF = (spark.readStream
+    val initDF = (sparkSession.readStream
       .format("socket")
       .option("host", host)
       .option("port", port)

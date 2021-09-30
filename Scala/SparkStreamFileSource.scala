@@ -15,14 +15,15 @@ object SparkStreamFileSource {
   def main(args: Array[String]): Unit = {
 
     // Create Spark Session
-    val spark = SparkSession
-      .builder()
-      .master("local")
-      .appName("File Source")
-      .getOrCreate()
+    // val sparkSession = SparkSession
+    //   .builder()
+    //   .master("local")
+    //   .appName("File Source")
+    //   .getOrCreate()
+    val sparkSession = SparkSession.builder.appName("File Source").config("spark.master", "local[*]").getOrCreate()
 
     // Set Spark logging level to ERROR.
-    spark.sparkContext.setLogLevel("ERROR")
+    sparkSession.sparkContext.setLogLevel("ERROR")
 
     // Define Schema
     val schema = StructType(
@@ -45,12 +46,12 @@ object SparkStreamFileSource {
 
     // Create Streaming DataFrame by reading data from File Source.
     val initDF = (
-      spark.readStream
+      sparkSession.readStream
         .format("csv")
         // This will read maximum of 2 files per mini batch. However, it can read less than 2 files.
         .option("maxFilesPerTrigger", 2)
         .option("header", true)
-        .option("path", "data/stream")
+        .option("path", "file:///home/hdoop/SparkSamples/data/stream")
         .schema(schema)
         .load()
         .withColumn(
@@ -59,18 +60,20 @@ object SparkStreamFileSource {
         )
     )
 
+    // Uncomment this line and comment the below view and query statements.
     // Basic Transformation.
     val stockDf = initDF
       .groupBy(col("Name"), year(col("Date")).as("Year"))
       .agg(max("High").as("Max"))
 
-    // Register DataFrame as view.
-    initDF.createOrReplaceTempView("stockView")
+    //// Comment above line to use this. And uncomment these.
+    // // Register DataFrame as view.
+    // initDF.createOrReplaceTempView("stockView")
 
-    // Run SQL Query
-    val query =
-      """select year(Date) as Year, Name, max(High) as Max from stockView group by Name, Year"""
-    val stockDf = spark.sql(query)
+    // // Run SQL Query
+    // val query =
+    //   """select year(Date) as Year, Name, max(High) as Max from stockView group by Name, Year"""
+    // val stockDf = sparkSession.sql(query)
 
     // Output to Console
     stockDf.writeStream

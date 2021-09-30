@@ -7,17 +7,18 @@ object SparkStreamRateSource {
   def main(args: Array[String]): Unit = {
 
     // Create Spark Session
-    val spark = SparkSession
-      .builder()
-      .master("local")
-      .appName("Rate Source")
-      .getOrCreate()
+    // val sparkSession = SparkSession
+    //   .builder()
+    //   .master("local")
+    //   .appName("Rate Source")
+    //   .getOrCreate()
+    val sparkSession = SparkSession.builder.appName("Rate Source").config("spark.master", "local[*]").getOrCreate()
 
     // Set Spark logging level to ERROR to avoid various other logs on console.
-    spark.sparkContext.setLogLevel("ERROR")
+    sparkSession.sparkContext.setLogLevel("ERROR")
 
     // Create streaming DataFrame.
-    val initDF = (spark.readStream
+    val initDF = (sparkSession.readStream
       .format("rate")
       .option("rowsPerSecond", 1)
       .load())
