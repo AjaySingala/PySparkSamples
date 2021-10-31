@@ -1,16 +1,16 @@
 // fold.scala
-package com.examples.spark.rdd.functions
+//package com.examples.spark.rdd.functions
 
 import org.apache.spark.sql.SparkSession
 
-object foldExample extends App {
+//object foldExample extends App {
 
-  val spark = SparkSession.builder()
-    .appName("ajaysingala.com")
-    .master("local[3]")
-    .getOrCreate()
+  // val spark = SparkSession.builder()
+  //   .appName("ajaysingala.com")
+  //   .master("local[3]")
+  //   .getOrCreate()
 
-  spark.sparkContext.setLogLevel("ERROR")
+  // spark.sparkContext.setLogLevel("ERROR")
 
   //fold example
   val listRdd = spark.sparkContext.parallelize(List(1,2,3,4,5,3,2))
@@ -27,4 +27,4 @@ object foldExample extends App {
   println("Min : "+inputRDD.fold(("",0))( (acc,ele)=>{ ("Min", acc._2 min ele._2)  }))
   println("Max : "+inputRDD.fold(("",0))( (acc,ele)=>{ ("Max", acc._2 max ele._2)  }))
 
-}
+//}

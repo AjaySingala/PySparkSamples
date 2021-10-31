@@ -1,0 +1,38 @@
+package example
+
+// sparksql_aggregates.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.SparkSqlAggregates
+package example
+
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.types._
+
+object SparkSqlAggregates {
+  def main(args: Array[String]): Unit = {
+    val spark: SparkSession = SparkSession
+      .builder()
+      .master("local[3]")
+      .appName("AjaySingala - SparkSqlAggregates")
+      .getOrCreate()
+    spark.sparkContext.setLogLevel("ERROR")
+    val sc = spark.sparkContext
+
+    val simpleData = [("James", "Sales", 3000),
+    ("Michael", "Sales", 4600),
+    ("Robert", "Sales", 4100),
+    ("Maria", "Finance", 3000),
+    ("James", "Sales", 3000),
+    ("Scott", "Finance", 3300),
+    ("Jen", "Finance", 3900),
+    ("Jeff", "Marketing", 3000),
+    ("Kumar", "Marketing", 2000),
+    ("Saif", "Sales", 4100)
+  ]
+schema = ["employee_name", "department", "salary"]
+df = spark.createDataFrame(data=simpleData, schema = schema)
+df.printSchema()
+df.show(truncate=False)
+
+
+  }
+}
