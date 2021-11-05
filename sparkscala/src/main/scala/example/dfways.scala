@@ -9,7 +9,7 @@ import org.apache.spark.sql.types._
 object dfways {
   case class Name(firstName: String, lastName: String, middleName: String)
 
-  def main(args: Array[String]): Unit = {
+  def main_dfways(args: Array[String]): Unit = {
     val spark = SparkSession
       .builder()
       .master("local[1]")
@@ -161,7 +161,7 @@ object dfways {
     println("Convert Spark RDD to Dataset...")
     val ds = spark.createDataset(rdd3)
     ds.printSchema()
-    
+
     println("Done...")
   }
 }
