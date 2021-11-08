@@ -1,0 +1,9 @@
+Scala - Spark Streaming - Twitter:
+https://jentekllc8888.medium.com/build-twitter-scala-api-library-for-spark-streaming-using-sbt-51fa9994d57e
+
+https://twitter4j.org/en/code-examples.html
+https://github.com/Twitter4J/Twitter4J/blob/master/twitter4j-examples/src/main/java/twitter4j/examples/search/SearchTweets.java
+https://alvinalexander.com/scala/scala-twitter-client-scalaj-http-htmlcleaner-how-to/
+
+libraryDependencies += "org.twitter4j" % "twitter4j-core" % "4.0.4"
+libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.4"
