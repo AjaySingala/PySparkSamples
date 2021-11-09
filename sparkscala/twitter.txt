@@ -7,3 +7,19 @@ https://alvinalexander.com/scala/scala-twitter-client-scalaj-http-htmlcleaner-ho
 
 libraryDependencies += "org.twitter4j" % "twitter4j-core" % "4.0.4"
 libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.4"
+
+API Key: H7uM1bpzPbNq4oe231zMIjDyf
+API Secret Key: exYeCWlX9jOplKI9OG1wnlSDl0B5aDd0APe7fBsfMIYxVpvgpb
+Bearer Token: AAAAAAAAAAAAAAAAAAAAAI5yVgEAAAAAFbfoVy5EOml3AXFiozAYr6AWuKs%3Dnba4SwXfi4wb2mVwPw6FGSDbjuyWmxEtxrL3psCsbMspY5usJ1
+Access Token: 179804560-v2gUch43ghv9bouDFww7YmXRTjcmcVy78Kt57bHz
+Access Token Secret: CE8qKhbj0EIjFvgQJVOE0aCF4s1xZjSFnx1njow5ytpu9
+
+curl "https://api.twitter.com/2/tweets/1261326399320715264" -H "Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAI5yVgEAAAAAFbfoVy5EOml3AXFiozAYr6AWuKs%3Dnba4SwXfi4wb2mVwPw6FGSDbjuyWmxEtxrL3psCsbMspY5usJ1"
+
+{
+    "data": {
+        "id": "179804560",
+        "name": "Ajay J. Singala",
+        "username": "asingala"
+    }
+}
