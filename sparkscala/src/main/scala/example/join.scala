@@ -12,6 +12,7 @@ object JoinExample extends App {
 
   spark.sparkContext.setLogLevel("ERROR")
 
+  println("Defining emp data...")
   val emp = Seq((1,"Smith",-1,"2018","10","M",3000),
     (2,"Rose",1,"2010","20","M",4000),
     (3,"Williams",1,"2010","10","M",1000),
@@ -19,22 +20,28 @@ object JoinExample extends App {
     (5,"Brown",2,"2010","40","",-1),
       (6,"Brown",2,"2010","50","",-1)
   )
+  println("Defining the emp schema...")
   val empColumns = Seq("emp_id","name","superior_emp_id","year_joined","emp_dept_id","gender","salary")
+
+  println("Creating the emp DF...")
   import spark.sqlContext.implicits._
   val empDF = emp.toDF(empColumns:_*)
   empDF.show(false)
 
+  println("Defining dept data...")
   val dept = Seq(("Finance",10),
     ("Marketing",20),
     ("Sales",30),
     ("IT",40)
   )
 
+  println("Defining the dept schema...")
   val deptColumns = Seq("dept_name","dept_id")
+  println("Creating the dept DF...")
   val deptDF = dept.toDF(deptColumns:_*)
   deptDF.show(false)
 
-
+  // SELECT ... FROM Emp INNER JOIN DEPT ON EMP.emp_dept_id = DEPT.dept_id
   println("Inner join")
   empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"inner")
     .show(false)
@@ -63,10 +70,12 @@ object JoinExample extends App {
   empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"leftouter")
     .show(false)
 
+  // Returns only columns from the left DF/DS for non-matched records.
   println("leftanti join")
   empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"leftanti")
     .show(false)
 
+  // Similar to INNER JOIN,, returns all columns from the left DF/DS and ignores all columns from the right DF/DS.
   println("leftsemi join")
   empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"leftsemi")
     .show(false)
@@ -86,13 +95,15 @@ object JoinExample extends App {
       col("emp2.name").as("superior_emp_name"))
       .show(false)
 
+  //SQL JOIN
   empDF.createOrReplaceTempView("EMP")
   deptDF.createOrReplaceTempView("DEPT")
 
-  //SQL JOIN
-  val joinDF = spark.sql("select * from EMP e, DEPT d where e.emp_dept_id == d.dept_id")
+  println("Join using SQL 'WHERE'...")
+  val joinDF = spark.sql("select * from EMP e, DEPT d WHERE e.emp_dept_id == d.dept_id")
   joinDF.show(false)
 
+  println("Join using SQL 'INNER JOIN'...")
   val joinDF2 = spark.sql("select * from EMP e INNER JOIN DEPT d ON e.emp_dept_id == d.dept_id")
   joinDF2.show(false)
 

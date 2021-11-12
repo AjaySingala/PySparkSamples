@@ -1,4 +1,5 @@
 // sparksql_first.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.SparkSqlFirst
 package example
 
 import org.apache.spark.sql.SparkSession
@@ -21,7 +22,7 @@ object SparkSqlFirst {
     
     println("Creating DF from people.json...")
     val df = spark.read.json(
-      "file:///home/maria_dev/SparkSamples//resources/spark_examples/people.json"
+      "file:///home/maria_dev/SparkSamples/resources/spark_examples/people.json"
     )
     
     import spark.implicits._
@@ -87,7 +88,7 @@ object SparkSqlFirst {
     primitiveDS.map(_ + 1).collect() // Returns: Array(2, 3, 4)
 
     // DataFrames can be converted to a Dataset by providing a class. Mapping will be done by name
-    println("Convert DF to DF using a class...")
+    println("Convert DF to DS using a class...")
     val path = "file:///home/maria_dev/SparkSamples/resources/spark_examples/people.json"
     val peopleDS = spark.read.json(path).as[Person]
     peopleDS.show()
@@ -95,7 +96,10 @@ object SparkSqlFirst {
     // Interoperating with RDDs.
     // Create an RDD of Person objects from a text file, convert it to a Dataframe
     println("Creating an RDD of Person from text file and coverting it to a DF named peopleDF...")
-    val peopleDF = spark.sparkContext.textFile("file:///home/maria_dev/SparkSamples/resources/spark_examples/people.txt").map(_.split(",")).map(attributes => Person(attributes(0), attributes(1).trim.toInt)).toDF()
+    val peopleDF = spark.sparkContext.textFile("file:///home/maria_dev/SparkSamples/resources/spark_examples/people.txt")
+      .map(_.split(","))
+      .map(attributes => Person(attributes(0), attributes(1).trim.toInt))
+      .toDF()
     // Register the DataFrame as a temporary view
     println("Creating temp view 'people' for peopleDF......")
     peopleDF.createOrReplaceTempView("people")
@@ -103,6 +107,8 @@ object SparkSqlFirst {
     // SQL statements can be run by using the sql methods provided by Spark
     println("Creating teenagersDF (people age between 13 and 19)...")
     val teenagersDF = spark.sql("SELECT name, age FROM people WHERE age BETWEEN 13 AND 19")
+    teenagersDF.show()
+    teenagersDF.printSchema()
 
     // The columns of a row in the result can be accessed by field index
     println("Showing names of teenagers accessed by field index...")
@@ -123,14 +129,14 @@ object SparkSqlFirst {
     // Generate the schema based on the string of schema
     println("Specifying schema to peopleRDD...")
     val fields = schemaString.split(" ")
-    .map(fieldName => StructField(fieldName, StringType, nullable = true))
+      .map(fieldName => StructField(fieldName, StringType, nullable = true))
     val schema = StructType(fields)
 
     // Convert records of the RDD (people) to Rows
     println("Converting records of RDD (people) to Rows...")
     val rowRDD = peopleRDD
-    .map(_.split(","))
-    .map(attributes => Row(attributes(0), attributes(1).trim))
+      .map(_.split(","))
+      .map(attributes => Row(attributes(0), attributes(1).trim))
 
     // Apply the schema to the RDD
     println("Applying schema to RDD peopleDF2...")

@@ -27,7 +27,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 //     StreamingExamples.setStreamingLogLevels()
 
-    var args: new Array[String](2)
+    var args: Array[String] = new Array[String](2)
     args(0) = "localhost"
     args(1) = "9999"
 

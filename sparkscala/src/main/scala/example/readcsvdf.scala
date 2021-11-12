@@ -43,7 +43,7 @@ object FromCSVFile {
 // Automatically infers column types based on the data.
 // Default value set to this option is false
     val df5 = spark.read
-      .options(Map("inferSchema" -> "true", "delimiter" -> ","))
+      .options(Map("header" -> "true", "inferSchema" -> "true", "delimiter" -> ","))
       .csv("file:///home/maria_dev/SparkSamples/resources/zipcodes.csv")
     df5.printSchema()
 

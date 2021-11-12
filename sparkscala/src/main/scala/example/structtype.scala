@@ -1,7 +1,7 @@
 // structtype.scala
 package example
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types._
 
 object StructTypeDemo {
@@ -16,7 +16,8 @@ object StructTypeDemo {
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
     val sc = spark.sparkContext
-    
+
+    println("Defining the data...")
     val simpleData = Seq(
       Row("James ", "", "Smith", "36636", "M", 3000),
       Row("Michael ", "Rose", "", "40288", "M", 4000),
@@ -25,6 +26,7 @@ object StructTypeDemo {
       Row("Jen", "Mary", "Brown", "", "F", -1)
     )
 
+    println("Defining the schema using StructType...")
     val simpleSchema = StructType(
       Array(
         StructField("firstname", StringType, true),
@@ -36,6 +38,7 @@ object StructTypeDemo {
       )
     )
 
+    println("Creating the DF...")
     val df = spark.createDataFrame(
       spark.sparkContext.parallelize(simpleData),
       simpleSchema
@@ -44,6 +47,8 @@ object StructTypeDemo {
     df.show()
 
     // Nested StructTypes.
+    println("Nested StrutTypes...")
+    println("Defining the data...")
     val structureData = Seq(
       Row(Row("James ", "", "Smith"), "36636", "M", 3100),
       Row(Row("Michael ", "Rose", ""), "40288", "M", 4300),
@@ -52,6 +57,7 @@ object StructTypeDemo {
       Row(Row("Jen", "Mary", "Brown"), "", "F", -1)
     )
 
+    println("Defining the nested schema...")
     val structureSchema = new StructType()
       .add(
         "name",
@@ -64,6 +70,7 @@ object StructTypeDemo {
       .add("gender", StringType)
       .add("salary", IntegerType)
 
+    println("Creating the DF...")
     val df2 = spark.createDataFrame(
       spark.sparkContext.parallelize(structureData),
       structureSchema
@@ -74,6 +81,8 @@ object StructTypeDemo {
     // ArrayType and MapType.
     // Column “hobbies” defined as ArrayType(StringType) and “properties” defined as MapType(StringType,StringType)
     // meaning both key and value as String.
+    println("ArrayType and MapType...")
+    println("Defining the data for ArrayType and MapType...")
     val arrayStructureData = Seq(
       Row(
         Row("James ", "", "Smith"),
@@ -102,6 +111,7 @@ object StructTypeDemo {
       )
     )
 
+    println("Defining the schema for ArrayTytpe and MapType...")
     val arrayStructureSchema = new StructType()
       .add(
         "name",
@@ -113,6 +123,7 @@ object StructTypeDemo {
       .add("hobbies", ArrayType(StringType))
       .add("properties", MapType(StringType, StringType))
 
+    println("Creating the DF...")
     val df5 = spark.createDataFrame(
       spark.sparkContext.parallelize(arrayStructureData),
       arrayStructureSchema
@@ -121,10 +132,14 @@ object StructTypeDemo {
     df5.show()
 
     // Convert case class to Spark StructType.
+    println("Convert case class to Spoark StructType...")
     import org.apache.spark.sql.catalyst.ScalaReflection
+    import org.apache.spark.sql.Encoders
+    println("Defining schema from case class...")
     val schema =
       ScalaReflection.schemaFor[Employee].dataType.asInstanceOf[StructType]
 
+    println("Encoding the schema...")
     val encoderSchema = Encoders.product[Employee].schema
     encoderSchema.printTreeString()
 

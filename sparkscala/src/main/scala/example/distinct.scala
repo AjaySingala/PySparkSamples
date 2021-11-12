@@ -15,6 +15,7 @@ object SQLDistinct extends App {
 
   import spark.implicits._
 
+  println("Defining the data...")
   val simpleData = Seq(("James", "Sales", 3000),
     ("Michael", "Sales", 4600),
     ("Robert", "Sales", 4100),
@@ -26,19 +27,28 @@ object SQLDistinct extends App {
     ("Kumar", "Marketing", 2000),
     ("Saif", "Sales", 4100)
   )
+
+  println("Creating the DF with schema...")
   val df = simpleData.toDF("employee_name", "department", "salary")
   df.show()
+  println("Total count: " + df.count())
 
   //Distinct all columns
+  // Skips James:Sales:3000
+  println("df.distinct()...")
   val distinctDF = df.distinct()
-  println("Distinct count: "+distinctDF.count())
+  println("Distinct count: " + distinctDF.count())
   distinctDF.show(false)
 
+  // Drops James:Sales:3000
+  println("df.dropDuplicates()...")
   val df2 = df.dropDuplicates()
   println("Distinct count: "+df2.count())
   df2.show(false)
 
   //Distinct using dropDuplicates
+  // Drops Saif:Sales:4100
+  println("Drop Duplicaes department and salary and then count...")
   val dropDisDF = df.dropDuplicates("department","salary")
   println("Distinct count of department & salary : "+dropDisDF.count())
   dropDisDF.show(false)

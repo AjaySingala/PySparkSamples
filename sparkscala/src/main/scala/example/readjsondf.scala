@@ -35,7 +35,7 @@ object FromJsonFile {
     println("read multiple files...")
     df2.show(false)
 
-        // //read files from a folder.
+    // //read files from a folder.
     // val df2 = spark.read.json("somefolder")
     // df2.show(false)
 
@@ -58,10 +58,10 @@ object FromJsonFile {
 .add("LocationText", StringType, true)
 .add("Location", StringType, true)
 .add("Decommisioned", BooleanType, true)
-.add("TaxReturnsFiled", StringType, true)
-.add("EstimatedPopulation", IntegerType, true)
-.add("TotalWages", IntegerType, true)
-.add("Notes", StringType, true)
+// .add("TaxReturnsFiled", StringType, true)
+// .add("EstimatedPopulation", IntegerType, true)
+// .add("TotalWages", IntegerType, true)
+// .add("Notes", StringType, true)
 
     val df_with_schema = spark.read.schema(schema).json("file:///home/maria_dev/SparkSamples/resources/zipcodes.json")
 
@@ -73,7 +73,7 @@ object FromJsonFile {
     // println("Dropping temp view zipcodes...")
     // spark.catalog.dropTempView("zipcodes")
 
-     println("Creiting temp view zipcodes...")
+     println("Creating temp view zipcodes...")
     // Read JSON file using Spark SQL.
     spark.sqlContext.sql(
       "CREATE TEMPORARY VIEW zipcodes USING json OPTIONS" + " (path 'file:///home/maria_dev/SparkSamples/resources/zipcodes.json')"
@@ -84,7 +84,9 @@ object FromJsonFile {
     spark.sqlContext.sql("select * from zipcodes where RecordNumber = 61392").show(false)
 
     // Write Spark DataFrame to JSON file.
-    println("Writing to /tmp/spark_output/zipcodes.json...")
-    df2.write.json("file:///tmp/spark_output/zipcodes.json")
+    // Will create part* files in the given folder.
+    // Delete the given folder rm -rf /tmp/spark_output/zipcodes
+    println("Writing to /tmp/spark_output/zipcodes...")
+    df2.write.json("file:///tmp/spark_output/zipcodes")
   }
 }

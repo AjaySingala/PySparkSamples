@@ -6,13 +6,17 @@ import org.apache.spark.sql.functions._
 object SparkStreamRateSource {
   def main(args: Array[String]): Unit = {
 
+    // If running with spark-submit.
     // Create Spark Session
     // val sparkSession = SparkSession
     //   .builder()
     //   .master("local")
     //   .appName("Rate Source")
     //   .getOrCreate()
-    val sparkSession = SparkSession.builder.appName("Rate Source").config("spark.master", "local[*]").getOrCreate()
+    // val sparkSession = SparkSession.builder.appName("Rate Source").config("spark.master", "local[*]").getOrCreate()
+
+    // If running with spark-shell:
+    val sparkSession = spark
 
     // Set Spark logging level to ERROR to avoid various other logs on console.
     sparkSession.sparkContext.setLogLevel("ERROR")

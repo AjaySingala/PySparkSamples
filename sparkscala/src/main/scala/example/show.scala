@@ -27,9 +27,10 @@ object show {
     val df = data.toDF(columns:_*)
     df.show()
 
-    println("Display full column contents...")
+    println("Display full column contents by saying 'truncate=false'...")
     df.show(false)
 
+    // By default, show() displays 20 rows.
     println("Display 2 rows and full column contents...")
     df.show(2, false)
     
@@ -39,7 +40,7 @@ object show {
     println("Display DataFrame rows & columns vertically...")
     df.show(3, 25, true)
 
-    println("...")
+    println("Done!")
 
   }
 }
