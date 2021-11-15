@@ -16,7 +16,7 @@ import org.apache.spark.sql.Column
 import org.apache.spark.sql.types._
 
 object SparkStreamFileSource {
-  def main(args: Array[String]): Unit = {
+  def main_f(args: Array[String]): Unit = {
 
     // Create Spark Session
     // val spark = SparkSession
@@ -24,7 +24,10 @@ object SparkStreamFileSource {
     //   .master("local")
     //   .appName("File Source")
     //   .getOrCreate()
-    val spark = SparkSession.builder.appName("File Source").config("spark.master", "local[*]").getOrCreate()
+    val spark = SparkSession.builder
+      .appName("File Source")
+      .config("spark.master", "local[*]")
+      .getOrCreate()
 
     // Set Spark logging level to ERROR.
     spark.sparkContext.setLogLevel("ERROR")
@@ -57,7 +60,7 @@ object SparkStreamFileSource {
         // This will read maximum of 2 files per mini batch. However, it can read less than 2 files.
         .option("maxFilesPerTrigger", 2)
         .option("header", true)
-        .option("path", "file://home/maria_dev/SparkSamples/data/stream")
+        .option("path", "file:///home/maria_dev/data/stream")
         .schema(schema)
         .load()
         .withColumn(

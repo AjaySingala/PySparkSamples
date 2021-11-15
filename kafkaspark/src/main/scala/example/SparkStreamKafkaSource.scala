@@ -1,10 +1,16 @@
 // SparkStreamKafkaSource.scala
-// spark-submit kafkaspark_2.11-0.1.0-SNAPSHOT.jar --class example.SparkStreamKafkaSource
+// spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0    ~/kafkaspark_2.11-0.1.0-SNAPSHOT.jar --class example.SparkStreamKafkaSource
 package example
 
+// On Custom VM:
 // kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic testscala
-// kafka-console-producer --broker-list localhost:9092 --topic testscala
-// kafka-console-consumer --bootstrap-server localhost:9092 --topic testscala
+// kafka-console-producer.sh --broker-list localhost:9092 --topic testscala
+// kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic testscala
+
+// On Hortonworks VM:
+// $KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper sandbox-hdp.hortonworks.com:2181  --replication-factor 1 --partitions 1 --topic testscala
+// $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list sandbox-hdp.hortonworks.com:6667  --topic testscala
+// $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdp.hortonworks.com:6667  --topic testscala
 
 // Import Libraries
 import org.apache.spark.sql.SparkSession
@@ -28,8 +34,9 @@ object SparkStreamKafkaSource {
     // Create streaming DF.
     val initDF = spark.readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", "localhost:9092")
-      .option("subscribe", "test")
+      //.option("kafka.bootstrap.servers", "localhost:9092")
+      .option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")
+      .option("subscribe", "testscala")
       .load()
       .select(col("value").cast("string"))
 

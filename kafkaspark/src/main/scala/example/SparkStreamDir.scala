@@ -6,7 +6,7 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructT
 
 object SparkStreamingFromDirectory {
 
-  def main(args: Array[String]): Unit = {
+  def main_d(args: Array[String]): Unit = {
 
     val spark:SparkSession = SparkSession.builder()
       .master("local[3]")
@@ -38,6 +38,7 @@ object SparkStreamingFromDirectory {
 
     val df = spark.readStream
       .schema(schema)
+      
       .json("file:///tmp/stream_folder")
 
     df.printSchema()
