@@ -1,16 +1,18 @@
 // SparkStreamDir.scala
 // Run the program, then copy files from SparkSamples/data/folder_streaming to /tmp/stream_folder (a few at a time to see results).
+// spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.4 ./kafkaspark_2.11-0.1.0-SNAPSHOT.jar --class example.SparkStreamingFromDirectory
+
 package example
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 
 object SparkStreamingFromDirectory {
 
-  def main_d(args: Array[String]): Unit = {
+  def main(args: Array[String]): Unit = {
 
     val spark:SparkSession = SparkSession.builder()
       .master("local[3]")
-      .appName("SparkByExamples")
+      .appName("SparkStreamingFromDirectory")
       .getOrCreate()
 
     spark.sparkContext.setLogLevel("ERROR")
@@ -38,9 +40,7 @@ object SparkStreamingFromDirectory {
 
     val df = spark.readStream
       .schema(schema)
-      
       .json("file:///tmp/stream_folder")
-
     df.printSchema()
 
     val groupDF = df.select("Zipcode")

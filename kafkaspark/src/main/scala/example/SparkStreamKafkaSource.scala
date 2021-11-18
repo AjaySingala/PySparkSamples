@@ -32,7 +32,7 @@ object SparkStreamKafkaSource {
     // Set Spark logging level to ERROR.
     spark.sparkContext.setLogLevel("ERROR")
     // Create streaming DF.
-    val initDF = spark.readStream
+    val initDf = spark.readStream
       .format("kafka")
       //.option("kafka.bootstrap.servers", "localhost:9092")
       .option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")
@@ -41,7 +41,7 @@ object SparkStreamKafkaSource {
       .select(col("value").cast("string"))
 
     // Transformation.
-    val wordCount = initDF
+    val wordCount = initDf
       .select(explode(split(col("value"), " ")).alias("words"))
       .groupBy("words")
       .count()
@@ -53,5 +53,18 @@ object SparkStreamKafkaSource {
       .start()
       .awaitTermination()
 
+    // // Output sink — Kafka.
+    // // Kafka expects data in a column name value, so let's concatenate all the column values and store them in one value column.
+    // val resultDf = initDf.withColumn("value", 
+    //   concat_ws("|",$"Name",$"Date",$"High",$"Low",$"Open",$"Close"))
+
+    // resultDf
+    //   .writeStream
+    //   .format("kafka")
+    //   .option("kafka.bootstrap.servers", "localhost:9092")
+    //   .option("topic", "testConsumer")
+    //   .option("checkpointLocation", "file:///home/maria_dev/output/checkpoint/kafka_checkpoint")
+    //   .start()
+    //   .awaitTermination()
   }
 }

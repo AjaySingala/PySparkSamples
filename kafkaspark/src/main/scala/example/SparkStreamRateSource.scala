@@ -45,6 +45,6 @@ object SparkStreamRateSource {
       .start()
       .awaitTermination()
 
-    // Use df.writeStream.option(“numRows”,20) to display more than 20 rows (which is the default).
+    // Use df.writeStream.option(“numRows”,50) to display more than 20 rows (which is the default).
   }
 }

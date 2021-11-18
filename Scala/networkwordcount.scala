@@ -9,6 +9,8 @@ import org.apache.spark.streaming.StreamingContext._ // not necessary since Spar
  *    `$ nc -lk 9999`
  * and then run the example
  *    ON HDP: spark-shell -i networkwordcount.scala
+ * OR (the master requires 2 cores)
+ *    spark-shell --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2 --master local[2]
 */
 
 // object NetworkWordCount {

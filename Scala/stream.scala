@@ -1,4 +1,16 @@
 // stream.scala
+
+// $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list sandbox-hdp.hortonworks.com:6667 --topic json_topic
+// $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdp.hortonworks.com:6667 --topic json_topic
+// $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdp.hortonworks.com:6667 --topic json_output_topic
+// spark-shell --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0.
+// Sample data:
+// {"id":1,"firstname":"James ","middlename":"","lastname":"Smith","dob_year":2018,"dob_month":1,"gender":"M","salary":3000}
+// {"id":2,"firstname":"Michael ","middlename":"Rose","lastname":"","dob_year":2010,"dob_month":3,"gender":"M","salary":4000}
+// {"id":3,"firstname":"Robert ","middlename":"","lastname":"Williams","dob_year":2010,"dob_month":3,"gender":"M","salary":4000}
+// {"id":4,"firstname":"Maria ","middlename":"Anne","lastname":"Jones","dob_year":2005,"dob_month":5,"gender":"F","salary":4000}
+// {"id":5,"firstname":"Jen","middlename":"Mary","lastname":"Brown","dob_year":2010,"dob_month":7,"gender":"","salary":-1}
+
 import org.apache.spark.sql.SparkSession
 //import org.apache.spark.sql.functions.{col, from_json}
 import org.apache.spark.sql.functions._
@@ -8,7 +20,7 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
 //  def main(args: Array[String]): Unit = {
 
-   val spark: SparkSession = SparkSession.builder().master("local[3]").appName("ajaysingala").getOrCreate()
+   //val spark: SparkSession = SparkSession.builder().master("local[3]").appName("ajaysingala").getOrCreate()
    
    import spark.implicits._
    
@@ -31,7 +43,7 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
    /**
     *uncomment below code if you want to write it to console for testing.
    */
-   val query = personDF.writeStream.format("console").outputMode("append").option("truncate", "false").start()
+   // val query = personDF.writeStream.format("console").outputMode("append").option("truncate", "false").start()
       //.awaitTermination()
 
 
@@ -57,11 +69,11 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
       .option("checkpointLocation", "/tmp/kafka_checkpoints")
       .option("topic", "json_output_topic")
       .start()
-      //.awaitTermination()
+      .awaitTermination()
 
-   dfOut.createOrReplaceTempView("Person")
-   val dfSQL =  spark.sql("SELECT * FROM PERSON")
-   val dfJSON = dfSQL.toJSON
-   dfJSON.writeStream.format("console").outputMode("append").option("truncate", "false").start()
+   // dfOut.createOrReplaceTempView("Person")
+   // val dfSQL =  spark.sql("SELECT * FROM PERSON")
+   // val dfJSON = dfSQL.toJSON
+   // dfJSON.writeStream.format("console").outputMode("append").option("truncate", "false").start().awaitTermination()
 //  }
 //}
