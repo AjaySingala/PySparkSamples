@@ -39,7 +39,8 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
    // Since the value is in binary, first we need to convert the binary value to String using selectExpr().
    // Also apply the schema.
    val personDF = df.selectExpr("CAST(value AS STRING)").select(from_json(col("value"), schema).as("data")).select("data.*")
-
+   personDF.printSchema()
+   
    /**
     *uncomment below code if you want to write it to console for testing.
    */
