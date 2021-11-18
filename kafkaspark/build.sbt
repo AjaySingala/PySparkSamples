@@ -18,6 +18,8 @@ lazy val root = (project in file("."))
     // For kafka.
     ,libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % "2.3.4"
     ,libraryDependencies += "org.apache.kafka" %% "kafka" % "2.1.0"
+    // For Json.
+    ,libraryDependencies += "net.liftweb" %% "lift-json" % "3.5.0"
   )
 
 // Uncomment the following for publishing to Sonatype.
