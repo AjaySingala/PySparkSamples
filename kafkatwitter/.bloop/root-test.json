@@ -1,0 +1,198 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "root-test",
+        "directory": "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter",
+        "workspaceDir": "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter",
+        "sources": [
+            "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\src\\test\\scala-2.12",
+            "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\src\\test\\scala",
+            "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\src\\test\\java",
+            "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\target\\scala-2.12\\src_managed\\test"
+        ],
+        "dependencies": [
+            "root"
+        ],
+        "classpath": [
+            "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\.bloop\\root\\scala-2.12\\classes",
+            "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-library\\jars\\scala-library-2.12.8.jar",
+            "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scalatest\\scalatest_2.12\\bundles\\scalatest_2.12-3.0.5.jar",
+            "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scalactic\\scalactic_2.12\\bundles\\scalactic_2.12-3.0.5.jar",
+            "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\jars\\scala-reflect-2.12.8.jar",
+            "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\bundles\\scala-xml_2.12-1.0.6.jar"
+        ],
+        "out": "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\.bloop\\root",
+        "classesDir": "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\.bloop\\root\\scala-2.12\\test-classes",
+        "resources": [
+            "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\src\\test\\resources",
+            "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\target\\scala-2.12\\resource_managed\\test"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.12.8",
+            "options": [
+                
+            ],
+            "jars": [
+                "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-compiler\\jars\\scala-compiler-2.12.8.jar",
+                "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-library\\jars\\scala-library-2.12.8.jar",
+                "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\jars\\scala-reflect-2.12.8.jar",
+                "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\bundles\\scala-xml_2.12-1.0.6.jar",
+                "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\jline\\jline\\jars\\jline-2.14.6.jar"
+            ],
+            "analysis": "C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter\\target\\streams\\test\\bloopAnalysisOut\\$global\\streams\\inc_compile_2.12.zip",
+            "setup": {
+                "order": "mixed",
+                "addLibraryToBootClasspath": true,
+                "addCompilerToClasspath": false,
+                "addExtraJarsToClasspath": false,
+                "manageBootClasspath": true,
+                "filterLibraryFromClasspath": true
+            }
+        },
+        "java": {
+            "options": [
+                
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    
+                ]
+            }
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "C:\\Program Files\\Java\\jdk-11.0.12",
+                "options": [
+                    "-Duser.dir=C:\\Users\\AjayJayantilalSingal\\Big Data\\SparkSamples\\kafkatwitter"
+                ]
+            },
+            "mainClass": [
+                
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.12.8",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-library\\jars\\scala-library-2.12.8.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-library\\srcs\\scala-library-2.12.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scalatest",
+                    "name": "scalatest_2.12",
+                    "version": "3.0.5",
+                    "artifacts": [
+                        {
+                            "name": "scalatest_2.12",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scalatest\\scalatest_2.12\\bundles\\scalatest_2.12-3.0.5.jar"
+                        },
+                        {
+                            "name": "scalatest_2.12",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scalatest\\scalatest_2.12\\srcs\\scalatest_2.12-3.0.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scalactic",
+                    "name": "scalactic_2.12",
+                    "version": "3.0.5",
+                    "artifacts": [
+                        {
+                            "name": "scalactic_2.12",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scalactic\\scalactic_2.12\\bundles\\scalactic_2.12-3.0.5.jar"
+                        },
+                        {
+                            "name": "scalactic_2.12",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scalactic\\scalactic_2.12\\srcs\\scalactic_2.12-3.0.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-reflect",
+                    "version": "2.12.8",
+                    "artifacts": [
+                        {
+                            "name": "scala-reflect",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\jars\\scala-reflect-2.12.8.jar"
+                        },
+                        {
+                            "name": "scala-reflect",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\srcs\\scala-reflect-2.12.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-xml_2.12",
+                    "version": "1.0.6",
+                    "artifacts": [
+                        {
+                            "name": "scala-xml_2.12",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\bundles\\scala-xml_2.12-1.0.6.jar"
+                        },
+                        {
+                            "name": "scala-xml_2.12",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\AjayJayantilalSingal\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\srcs\\scala-xml_2.12-1.0.6-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "test"
+        ]
+    }
+}
