@@ -60,8 +60,8 @@ object WithColumn {
 
     //Renaming a column.
     println("Rename column 'gender' to 'sex'...")
-    val df3=df2.withColumnRenamed("gender","sex")
-    df3.printSchema()
+    val dfRen=df2.withColumnRenamed("gender","sex")
+    dfRen.printSchema()
 
     //Droping a column
     println("Drop column 'CopiedColumn'...")

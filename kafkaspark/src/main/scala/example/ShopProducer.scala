@@ -15,7 +15,7 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.write
 
 object ShopProducer {
-  def main(args: Array[String]): Unit = {
+  def main_sp(args: Array[String]): Unit = {
     val props: Properties = new Properties()
     //props.put("bootstrap.servers","localhost:9092")
     props.put("bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")

@@ -1,6 +1,6 @@
+// groupby.scala
 package example
 
-// groupby.scala
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
