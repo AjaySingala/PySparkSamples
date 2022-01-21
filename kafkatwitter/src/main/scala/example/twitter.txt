@@ -1,4 +1,4 @@
-H7uM1bpzPbNq4oe231zMIjDyf
-exYeCWlX9jOplKI9OG1wnlSDl0B5aDd0APe7fBsfMIYxVpvgpb
-179804560-v2gUch43ghv9bouDFww7YmXRTjcmcVy78Kt57bHz
-CE8qKhbj0EIjFvgQJVOE0aCF4s1xZjSFnx1njow5ytpu9
+_consumerKey = "H7uM1bpzPbNq4oe231zMIjDyf"
+_consumerSecret = "exYeCWlX9jOplKI9OG1wnlSDl0B5aDd0APe7fBsfMIYxVpvgpb"
+_accessToken = "179804560-v2gUch43ghv9bouDFww7YmXRTjcmcVy78Kt57bHz"
+_accessTokenSecret = "CE8qKhbj0EIjFvgQJVOE0aCF4s1xZjSFnx1njow5ytpu9"
