@@ -24,7 +24,7 @@ object reduceExample extends App {
   println("output max : "+listRdd.reduce( (a,b) => a max b))
   println("output sum : "+listRdd.reduce( (a,b) => a + b))
 
-
+  // Reduce function on Tuple RDD(String,Int).
   val inputRDD = spark.sparkContext.parallelize(List(("Z", 1),("A", 20),("B", 30),
     ("C", 40),("B", 30),("B", 60)))
 

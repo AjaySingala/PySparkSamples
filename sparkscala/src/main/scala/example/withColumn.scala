@@ -6,7 +6,7 @@ import org.apache.spark.sql.types.{StringType, StructType}
 import org.apache.spark.sql.functions._
 object WithColumn {
 
-  def main(args:Array[String]):Unit= {
+  def mainWithCol(args:Array[String]):Unit= {
 
     val spark: SparkSession = SparkSession.builder()
       .master("local[1]")

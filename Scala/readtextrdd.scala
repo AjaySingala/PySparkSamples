@@ -14,7 +14,7 @@ object ReadTextFiles extends App {
   spark.sparkContext.setLogLevel("ERROR")
 
   println("##spark read text files from a directory into RDD")
-  val rddFromFile = spark.sparkContext.textFile("../resources/csv/text01.txt")
+  val rddFromFile = spark.sparkContext.textFile("file:///home/maria_dev/SparkSamples/resources/csv/text01.txt")
   println(rddFromFile.getClass)
 
   println("##Get data Using collect")
@@ -23,26 +23,26 @@ object ReadTextFiles extends App {
   })
 
   println("##read multiple text files into a RDD")
-  val rdd4 = spark.sparkContext.textFile("../resources/csv/text01.txt," +
-    "../resources/csv/text02.txt")
+  val rdd4 = spark.sparkContext.textFile("file:///home/maria_dev/SparkSamples/resources/csv/text01.txt," +
+    "file:///home/maria_dev/SparkSamples/resources/csv/text02.txt")
   rdd4.foreach(f=>{
     println(f)
   })
 
   println("##read text files base on wildcard character")
-  val rdd3 = spark.sparkContext.textFile("../resources/csv/text*.txt")
+  val rdd3 = spark.sparkContext.textFile("file:///home/maria_dev/SparkSamples/resources/csv/text*.txt")
   rdd3.foreach(f=>{
     println(f)
   })
 
   println("##read all text files from a directory to single RDD")
-  val rdd2 = spark.sparkContext.textFile("../resources/csv/*")
+  val rdd2 = spark.sparkContext.textFile("file:///home/maria_dev/SparkSamples/resources/csv/*")
   rdd2.foreach(f=>{
     println(f)
   })
 
   println("##read whole text files")
-  val rddWhole:RDD[(String,String)] = spark.sparkContext.wholeTextFiles("../resources/csv/text01.txt")
+  val rddWhole:RDD[(String,String)] = spark.sparkContext.wholeTextFiles("file:///home/maria_dev/SparkSamples/resources/csv/*.txt")
   println(rddWhole.getClass)
   rddWhole.foreach(f=>{
     println(f._1+"=>"+f._2)

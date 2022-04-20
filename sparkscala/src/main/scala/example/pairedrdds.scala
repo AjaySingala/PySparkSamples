@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 import scala.collection.mutable
 
 object OperationsOnPairRDD {
-  def main(args: Array[String]): Unit = {
+  def mainPRDD(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .appName("AjaySingala")
       .master("local")

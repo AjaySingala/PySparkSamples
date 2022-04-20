@@ -15,7 +15,7 @@ class TwoPartsPartitioner(override val numPartitions: Int) extends Partitioner {
     }
 }
 object PartitionerTwoParts {
-    def main(args: Array[String]): Unit = {
+    def mainPartitionTwoParts(args: Array[String]): Unit = {
         val spark = SparkSession
         .builder()
         .appName("Spark Two Parts Partitioner")

@@ -1,12 +1,12 @@
-// rddtransformations.scala 
-package com.examples.spark.rdd
+package sparkbasics
 
+// rddtransformations.scala 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 
 object WordCountExample {
 
-  def main(args:Array[String]): Unit = {
+  def mainWordCount(args:Array[String]): Unit = {
 
     val spark:SparkSession = SparkSession.builder()
       .master("local[3]")
@@ -75,7 +75,7 @@ object WordCountExample {
     })
 
     //Action - saveAsTextFile
-    rdd5.saveAsTextFile("file://home/maria_dev/tmp/wordCount")
+    rdd5.saveAsTextFile("file:///home/maria_dev/tmp/wordCount")
     
   }
 }

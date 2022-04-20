@@ -22,7 +22,7 @@ class Mypartitioner2( num:Int) extends org.apache.spark.Partitioner{
  }
 
 object PartitionerPersonal {
-    def main(args: Array[String]): Unit = {
+    def mainPartitionPersonal(args: Array[String]): Unit = {
         val spark = SparkSession
         .builder()
         .appName("Spark Personal Partitioner")

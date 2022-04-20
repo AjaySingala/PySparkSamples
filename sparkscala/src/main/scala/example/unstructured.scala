@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 
 object UnstructuredExample {
 
-  def main(args: Array[String]) {
+  def mainUnmstructured(args: Array[String]) {
     val spark = SparkSession
       .builder()
       .appName("AjaySingala")

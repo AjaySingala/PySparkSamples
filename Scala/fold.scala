@@ -20,6 +20,7 @@ import org.apache.spark.sql.SparkSession
   println("Min : "+listRdd.fold(0)((acc,ele) => {acc min ele}))
   println("Max : "+listRdd.fold(0)((acc,ele) => {acc max ele}))
   
+  // Using fold on RDD(String,Int) type.
   val inputRDD = spark.sparkContext.parallelize(List(("Z", 1),("A", 20),("B", 30),
 ("C", 40),("B", 30),("B", 60)))
 

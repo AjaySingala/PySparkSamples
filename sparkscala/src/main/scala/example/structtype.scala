@@ -8,7 +8,7 @@ object StructTypeDemo {
   case class Name(first: String, last: String, middle: String)
   case class Employee(fullName: Name, age: Integer, gender: String)
 
-  def main(args: Array[String]): Unit = {
+  def mainStruct(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession
       .builder()
       .master("local[3]")

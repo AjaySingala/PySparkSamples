@@ -5,7 +5,7 @@ import java.util.Properties
 
 import org.apache.spark.sql.SparkSession
 
-//object SQLDataSourceExample {
+object SQLDataSourceExample {
 
   case class Person(name: String, age: Long)
 
@@ -91,7 +91,7 @@ import org.apache.spark.sql.SparkSession
     println(s"Describe table Table bucketed_4_10e4...")
     val demoTable = "bucketed_4_10e4"
     // DESC EXTENDED or DESC FORMATTED would also work
-    val describeSQL = sql(s"DESCRIBE EXTENDED $demoTable")
+    val describeSQL = spark.sql(s"DESCRIBE EXTENDED $demoTable")
     describeSQL.show(numRows = 21, truncate = false)
 
     // $example off:direct_sql$
@@ -119,12 +119,12 @@ import org.apache.spark.sql.SparkSession
 
   }
 
-  //def main(args: Array[String]) {
-    // val spark = SparkSession
-    // .builder()
-    // .appName("Spark SQL data sources example")
-    // //.config("spark.some.config.option", "some-value")
-    // .getOrCreate()
+  //def mainBucket(args: Array[String]) {
+    val spark = SparkSession
+    .builder()
+    .appName("Spark SQL data sources example")
+    //.config("spark.some.config.option", "some-value")
+    .getOrCreate()
 
     runBasicDataSourceExample(spark)
       //runBasicParquetExample(spark)

@@ -21,7 +21,7 @@ import org.apache.spark.sql.SparkSession
     ("Maria","Jones","USA","FL")
   )
 
-  val rdd = spark.sparkContext.parallelize(data)
+  val rdd = spark.sparkContext.parallelize(data)  // sc.parallelize(data)
 
   val rdd2 = rdd.map(f=>{
     val country = f._3

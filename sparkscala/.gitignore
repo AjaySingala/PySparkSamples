@@ -1,5 +1,7 @@
 /.bsp/
 target/
+/project/.bloop/
+/project/.metals/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

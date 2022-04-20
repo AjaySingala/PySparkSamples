@@ -5,7 +5,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types._
 
 object SelectCols {
-  def main(args: Array[String]): Unit = {
+  def mainCols(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession
       .builder()
       .master("local[1]")
