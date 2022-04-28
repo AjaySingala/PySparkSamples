@@ -1,6 +1,8 @@
 // KafkaProducerApp.scala
 // $KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic text_topic
 // $KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper sandbox-hdp.hortonworks.com:2181 --replication-factor 1 --partitions 1 --topic text_topic
+// spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.4 producer.jar --class example.KafkaProducerApp
+
 package example
 
 import java.util.Properties

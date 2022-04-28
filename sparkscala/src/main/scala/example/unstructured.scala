@@ -1,11 +1,13 @@
 // unstructured.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.UnstructuredExample
+
 package example
 
 import org.apache.spark.sql.SparkSession
 
 object UnstructuredExample {
 
-  def mainUnmstructured(args: Array[String]) {
+  def main_UnstructuredExample(args: Array[String]) {
     val spark = SparkSession
       .builder()
       .appName("AjaySingala")
@@ -36,7 +38,7 @@ object UnstructuredExample {
       "file:///home/maria_dev/SparkSamples/sparkscala/src/main/scala/example/twinkle.txt"
     )
     println("Fetch all lines that have the word 'twinkle' using filter(value like)...")
-    val c_twinkle = c.filter("value like '%twinkle%'")
+    val c_twinkle = c.filter("value like '%twinkle%'")    // In SQL: WHERE value LIKE '%twinkle%'
     c_twinkle.show(false)
 
   }

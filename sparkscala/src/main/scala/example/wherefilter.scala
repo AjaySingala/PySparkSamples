@@ -1,11 +1,13 @@
+// wherefilter.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.FilterExample
+
 package example
 
-// wherefilter.scala
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{ArrayType, StringType, StructType}
 import org.apache.spark.sql.functions.array_contains
 
-object FilterExample extends App{
+object FilterExample { // extends App{
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")
     .appName("AjaySingala.com")
@@ -37,7 +39,7 @@ object FilterExample extends App{
   val df = spark.createDataFrame(
    spark.sparkContext.parallelize(arrayStructureData),arrayStructureSchema)
   df.printSchema()
-  df.show()
+  df.show(false)
 
   //Condition
   println("Show rows where state = 'OH' using the df object...")

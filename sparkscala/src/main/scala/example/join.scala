@@ -1,9 +1,10 @@
+// join.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.JoinExample
 package example
 
-// join.scala
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
-object JoinExample extends App {
+object JoinExample { //extends App {
 
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")
@@ -70,14 +71,15 @@ object JoinExample extends App {
   empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"leftouter")
     .show(false)
 
+  // Similar to INNER JOIN, returns all columns from the left DF/DS for matching records 
+  //and ignores all columns from the right DF/DS.
+  println("leftsemi join")
+  empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"leftsemi")
+    .show(false)
+
   // Returns only columns from the left DF/DS for non-matched records.
   println("leftanti join")
   empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"leftanti")
-    .show(false)
-
-  // Similar to INNER JOIN,, returns all columns from the left DF/DS and ignores all columns from the right DF/DS.
-  println("leftsemi join")
-  empDF.join(deptDF,empDF("emp_dept_id") ===  deptDF("dept_id"),"leftsemi")
     .show(false)
 
   println("cross join")

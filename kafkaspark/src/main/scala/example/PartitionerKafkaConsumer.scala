@@ -13,7 +13,7 @@ import scala.collection.JavaConverters._
 import org.apache.kafka.clients.consumer.KafkaConsumer
 
 object PartitionerKafkaConsumer {
-  def main(args: Array[String]): Unit = {
+  def main_PartitionerKafkaConsumer(args: Array[String]): Unit = {
     val props: Properties = new Properties()
     val topicName = "department"
 

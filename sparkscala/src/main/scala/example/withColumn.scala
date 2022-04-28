@@ -1,12 +1,14 @@
+// withColumn.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.WithColumn
+
 package example
 
-// withColumn.scala
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{StringType, StructType}
 import org.apache.spark.sql.functions._
 object WithColumn {
 
-  def mainWithCol(args:Array[String]):Unit= {
+  def main_WithColumn(args:Array[String]):Unit= {
 
     val spark: SparkSession = SparkSession.builder()
       .master("local[1]")
@@ -75,11 +77,11 @@ object WithColumn {
     dflit.printSchema()
     dflit.show()
 
-    //Retrieving
-    df2.show(false)
-    df2.select("name").show(false)
-    df2.select("name.firstname").show(false)
-    df2.select("name.*").show(false)
+    // //Retrieving
+    // df2.show(false)
+    // df2.select("name").show(false)
+    // df2.select("name.firstname").show(false)
+    // df2.select("name.*").show(false)
 
     println("Use 'SELECT' statement on tempo view 'PERSON' for df2...")
     df2.createOrReplaceTempView("PERSON")

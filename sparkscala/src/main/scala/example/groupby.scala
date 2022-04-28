@@ -1,10 +1,11 @@
 // groupby.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.GroupbyExample
 package example
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
-object GroupbyExample extends App {
+object GroupbyExample { //extends App {
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")
     .appName("AjaySingala.com")

@@ -1,9 +1,10 @@
+// sortorderby.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.SortExample
 package example
 
-// sortorderby.scala
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
-object SortExample extends App {
+object SortExample { //extends App {
 
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")

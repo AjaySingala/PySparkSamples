@@ -18,7 +18,7 @@ import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Column, Dataset, Row, SparkSession}
 
 object SparkStreamFileSource {
-  def main_f(args: Array[String]): Unit = {
+  def main_fs(args: Array[String]): Unit = {
 
     // Create Spark Session
     // val spark = SparkSession
@@ -66,7 +66,7 @@ object SparkStreamFileSource {
     println("Creating Streaming DF by reading file source...")
     val initDF = (
       spark.readStream
-        .format("csv")
+        .format("csv")    // supports csv, json, orc, parquet.
         .option("maxFilesPerTrigger", 2)
         .option("header", true)
         .option("path", "data/stream")      // hdfs://user/maria_dev/data/stream
@@ -94,16 +94,16 @@ object SparkStreamFileSource {
     //   """select year(Date) as Year, Name, max(High) as Max from stockView group by Name, Year"""
     // val stockDf = spark.sql(query)
 
-    // Output to Console
-    // Try "update" and "complete" mode.
-    println("Output to console...")
-    stockDf.writeStream
-      .outputMode("update") 
-      .option("truncate", false)
-      .option("numRows", 3)
-      .format("console")
-      .start()
-      .awaitTermination()
+    // // Output to Console
+    // // Try "update" and "complete" mode.
+    // println("Output to console...")
+    // stockDf.writeStream
+    //   .outputMode("update") 
+    //   .option("truncate", false)
+    //   .option("numRows", 3)
+    //   .format("console")
+    //   .start()
+    //   .awaitTermination()
 
     // // Output to file sink: CSV.
     // // File sink only supports append output mode.
@@ -120,9 +120,9 @@ object SparkStreamFileSource {
     //   .start()
     //   .awaitTermination()
     //
-    // Output to file sink: JSON
+    // // Output to file sink: JSON
     // val resultDf = initDF.select("Name", "Date", "Open", "Close")
-    //println("Output to json...")
+    // println("Output to json...")
     // resultDf
     //   .writeStream
     //   .outputMode("append") // Filesink only support Append mode.
@@ -134,6 +134,8 @@ object SparkStreamFileSource {
     //
     // // Output to Kafka sink.
     // // $KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic testConsumer1
+    // // Run a consumer:
+    // // $KAFKA_HOME/bin/kafka-console-consumer.sh  --topic testConsumer1 --bootstrap-server sandbox-hdp.hortonworks.com:6667 --from-beginning
     // println("Output to Kafka Topic 'testConsumer1'...")
     // val resultDf = initDF.withColumn("value", 
     //     concat_ws("|",col("Name"),col("Date"),col("High"),col("Low"),col("Open"),col("Close"))
@@ -147,17 +149,17 @@ object SparkStreamFileSource {
     //   // .drop("Close")
     //   // .drop("Volume")
     // resultDf.printSchema()
-    //
-    // println("Output to console...")
-    // resultDf.selectExpr("CAST(Name AS STRING) AS key", "CAST(value AS STRING) AS value")
-    //   .writeStream
-    //   .outputMode("update") 
-    //   .option("truncate", false)
-    //   .option("numRows", 3)
-    //   .format("console")
-    //   .start()
-    //   .awaitTermination()
-    //
+    
+    // // println("Output to console...")
+    // // resultDf.selectExpr("CAST(Name AS STRING) AS key", "CAST(value AS STRING) AS value")
+    // //   .writeStream
+    // //   .outputMode("update") 
+    // //   .option("truncate", false)
+    // //   .option("numRows", 3)
+    // //   .format("console")
+    // //   .start()
+    // //   .awaitTermination()
+    
     // resultDf.selectExpr("CAST(Name AS STRING) AS key", "CAST(value AS STRING) AS value")
     //   .writeStream
     //   .format("kafka")

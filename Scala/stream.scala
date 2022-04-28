@@ -30,7 +30,7 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
    // // Custom Ubuntu VM.
    // val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "localhost:9092").option("subscribe", "json_topic").option("startingOffsets", "earliest").load()
    // Hortonworks HDP VM.
-   val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667").option("subscribe", "json_topic").option("startingOffsets", "earliest").load()
+   val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667").option("subscribe", "json_topic").option("startingOffsets", "earliest").option("failOnDataLoss", false).load()
 
    //df.printSchema()
 
@@ -44,8 +44,7 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
    /**
     *uncomment below code if you want to write it to console for testing.
    */
-   // val query = personDF.writeStream.format("console").outputMode("append").option("truncate", "false").start()
-      //.awaitTermination()
+   // val query = personDF.writeStream.format("console").outputMode("append").option("truncate", "false").start().awaitTermination()
 
 
    /**
@@ -53,24 +52,17 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
    */
    val dfOut = personDF.selectExpr("CAST(id AS STRING) AS key", "to_json(struct(*)) AS value").alias("value")
    dfOut.printSchema()
-   // // Custom Ubuntu VM.
-   // dfOut
-   //    .writeStream.format("kafka")
-   //    .outputMode("append")
-   //    .option("kafka.bootstrap.servers", "localhost:9092")
-   //    .option("checkpointLocation", "/tmp/kafka_checkpoints")
-   //    .option("topic", "json_output_topic")
-   //    .start()
-   //    //.awaitTermination()
+   // // // Custom Ubuntu VM.
+   // // dfOut
+   // //    .writeStream.format("kafka")
+   // //    .outputMode("append")
+   // //    .option("kafka.bootstrap.servers", "localhost:9092")
+   // //    .option("checkpointLocation", "/tmp/kafka_checkpoints")
+   // //    .option("topic", "json_output_topic")
+   // //    .start()
+   // //    //.awaitTermination()
    // Hortonworks HDP VM.
-   dfOut
-      .writeStream.format("kafka")
-      .outputMode("append")
-      .option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")
-      .option("checkpointLocation", "/tmp/kafka_checkpoints")
-      .option("topic", "json_output_topic")
-      .start()
-      .awaitTermination()
+   dfOut.writeStream.format("kafka").outputMode("append").option("kafka.bootstrap.servers", "sandbox-hdp.hortonworks.com:6667").option("checkpointLocation", "/tmp/kafka_checkpoints").option("topic", "json_output_topic").start().awaitTermination()
 
    // dfOut.createOrReplaceTempView("Person")
    // val dfSQL =  spark.sql("SELECT * FROM PERSON")

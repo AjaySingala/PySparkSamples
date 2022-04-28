@@ -1,17 +1,21 @@
 // collect.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.CollectExample
+
 package example
 
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
-object CollectExample extends App {
+object CollectExample { // extends App {
 
   val spark: SparkSession = SparkSession
     .builder()
     .master("local[1]")
     .appName("AjaySingala.com")
     .getOrCreate()
-
+  
+  spark.sparkContext.setLogLevel("ERROR")
+  
   println("Defining the data...")
   val data = Seq(
     Row(Row("James ", "", "Smith"), "36636", "M", 3000),

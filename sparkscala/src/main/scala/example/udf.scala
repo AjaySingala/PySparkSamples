@@ -5,7 +5,7 @@ import org.apache.spark.sql.functions.udf
 import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.{Row, SparkSession}
 
-object SparkUDF extends App{
+object SparkUDF {// extends App{
 
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")

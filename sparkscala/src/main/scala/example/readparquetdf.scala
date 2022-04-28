@@ -1,4 +1,5 @@
 // readparquetdf.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.ParquetExample
 package example
 
 import org.apache.spark.sql.SparkSession
@@ -12,6 +13,7 @@ object ParquetExample {
       .master("local[1]")
       .appName("AjaySingala.com")
       .getOrCreate()
+    spark.sparkContext.setLogLevel("ERROR")
 
     println("Define the data...")
     //  Create a Spark DataFrame from Seq object.
@@ -25,13 +27,13 @@ object ParquetExample {
 
     println("Define the schema...")
     val columns =
-      Seq("firstname", "middlename", "lastname", "dob", "gender", "salary")
+      Seq("firstname", "middlename", "lastname", "id", "gender", "salary")
 
     println("Create the DF...")
     import spark.sqlContext.implicits._
     val df = data.toDF(columns: _*)
-    df.show()
     df.printSchema()
+    df.show()
 
     // Write DataFrame to Parquet file format.
     println("Write the DF to a Parquet file...")
@@ -54,8 +56,8 @@ object ParquetExample {
     spark.sql("select * from ParquetTable where salary >= 4000").explain()
     println("Fetch data from the view using SQL syntax...")
     val parkSQL = spark.sql("select * from ParquetTable where salary >= 4000")
-    parkSQL.show()
     parkSQL.printSchema()
+    parkSQL.show()
 
     // Spark parquet partition – Improving performance.
     println("Creating parquet with partitions...")

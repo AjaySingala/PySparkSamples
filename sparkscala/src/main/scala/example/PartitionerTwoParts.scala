@@ -1,5 +1,7 @@
 // PartitionerTwoParts.scala
 // https://gist.github.com/girisandeep/f90e456da6f2381f9c86e8e6bc4e8260
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.PartitionerTwoParts
+
 package example
 
 import org.apache.spark.sql.SparkSession
@@ -15,7 +17,7 @@ class TwoPartsPartitioner(override val numPartitions: Int) extends Partitioner {
     }
 }
 object PartitionerTwoParts {
-    def mainPartitionTwoParts(args: Array[String]): Unit = {
+    def main_PartitionerTwoParts(args: Array[String]): Unit = {
         val spark = SparkSession
         .builder()
         .appName("Spark Two Parts Partitioner")

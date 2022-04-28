@@ -1,3 +1,5 @@
+// HiveContextDemp.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.HiveContextDemo
 package example
 
 //file:///home/maria_dev/SparkSamples/resources/employee_hive.txt
@@ -6,7 +8,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
 
 object HiveContextDemo {
-  def mainHiveContextDemo(args: Array[String]): Unit = {
+  def main_Hive(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession
       .builder()
       .master("local[3]")
@@ -29,9 +31,11 @@ object HiveContextDemo {
     sqlContext.sql("LOAD DATA LOCAL INPATH 'file:///home/maria_dev/SparkSamples/resources/employee_hive.txt' INTO TABLE employee_hive")
 
     println("Select Fields from the Table...")
+    //val result = sqlContext.sql("SELECT id, name, age FROM employee_hive")
     val result = sqlContext.sql("FROM employee_hive SELECT id, name, age")
 
     println("Display the results...")
+    result.printSchema()
     result.show()
 
   }

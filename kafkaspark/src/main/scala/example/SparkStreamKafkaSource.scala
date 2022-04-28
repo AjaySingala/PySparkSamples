@@ -18,7 +18,7 @@ import org.apache.spark.sql.Row
 import org.apache.spark.sql.functions._
 
 object SparkStreamKafkaSource {
-  def main_k(args: Array[String]): Unit = {
+  def main_ks(args: Array[String]): Unit = {
     // Create Spark Session
     //val sparkSession = SparkSession
     //  .builder()

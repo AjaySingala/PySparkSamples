@@ -10,7 +10,7 @@ import org.apache.spark.sql.types._
 object SparkSqlFirst {
   case class Person(name: String, age: Long)
 
-  def main_SparkSqlFirst(args: Array[String]): Unit = {
+  def main_first(args: Array[String]): Unit = {
 
     val spark = SparkSession
       .builder()
@@ -76,6 +76,7 @@ object SparkSqlFirst {
     // Global temporary view is cross-session
     println("use global_temp.people across sessions...")
     spark.newSession().sql("SELECT * FROM global_temp.people").show()
+    //spark.newSession().sql("SELECT * FROM people").show()     // Does not work.
 
     // Creating Datasets.
     // Encoders are created for case classes
@@ -85,7 +86,7 @@ object SparkSqlFirst {
 
     // Encoders for most common types are automatically provided by importing spark.implicits._
     val primitiveDS = Seq(1, 2, 3).toDS()
-    primitiveDS.map(_ + 1).collect() // Returns: Array(2, 3, 4)
+    primitiveDS.map(_ + 1).collect().foreach(println) // Returns: Array(2, 3, 4)
 
     // DataFrames can be converted to a Dataset by providing a class. Mapping will be done by name
     println("Convert DF to DS using a class...")
@@ -117,6 +118,7 @@ object SparkSqlFirst {
     // or by field name
     println("Showing names of teenagers accessed by field name...")
     teenagersDF.map(teenager => "Name: " + teenager.getAs[String]("name")).show()
+    teenagersDF.map(teenager => "Age: " + teenager.getAs[Int]("age")).show()
 
     // Programmatically Specifying the Schema.
     // Create an RDD
@@ -143,7 +145,7 @@ object SparkSqlFirst {
     val peopleDF2 = spark.createDataFrame(rowRDD, schema)
 
     // Creates a temporary view using the DataFrame
-    println("Creating temp view 'peoiple' for peopleDF2...")
+    println("Creating temp view 'people' for peopleDF2...")
     peopleDF2.createOrReplaceTempView("people")
 
     // SQL can be run over a temporary view created using DataFrames

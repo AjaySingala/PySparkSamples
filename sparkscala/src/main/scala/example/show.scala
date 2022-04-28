@@ -1,4 +1,6 @@
 // show.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.show
+
 package example
 
 import org.apache.spark.sql.SparkSession
@@ -28,11 +30,11 @@ object show {
     df.show()
 
     println("Display full column contents by saying 'truncate=false'...")
-    df.show(false)
+    df.show(false)    // df.show(truncate=false)
 
     // By default, show() displays 20 rows.
     println("Display 2 rows and full column contents...")
-    df.show(2, false)
+    df.show(2, false) // df.show(numRows=2, truncate=false)
     
     println("Display 2 rows & column values 25 characters...")
     df.show(2, 25)

@@ -1,10 +1,11 @@
+// distinct.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.SQLDistinct
 package example
 
-// distinct.scala
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
-object SQLDistinct extends App {
+object SQLDistinct {// extends App {
 
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")
@@ -34,7 +35,7 @@ object SQLDistinct extends App {
   println("Total count: " + df.count())
 
   //Distinct all columns
-  // Skips James:Sales:3000
+  // Skips duplicate James:Sales:3000
   println("df.distinct()...")
   val distinctDF = df.distinct()
   println("Distinct count: " + distinctDF.count())

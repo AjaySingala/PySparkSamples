@@ -15,29 +15,29 @@ object FromJsonFile {
     spark.sparkContext.setLogLevel("ERROR")
     val sc = spark.sparkContext
 
-    //read json file into dataframe
-    val df = spark.read.json("file:///home/maria_dev/SparkSamples/resources/employee.json")
-    println("df.printSchema() of json file read into dataframe...")
-    df.printSchema()
-    println("Printing json file in dataframe...")
-    df.show(false)
+//     //read json file into dataframe
+//     val df = spark.read.json("file:///home/maria_dev/SparkSamples/resources/employee.json")
+//     println("df.printSchema() of json file read into dataframe...")
+//     df.printSchema()
+//     println("Printing json file in dataframe...")
+//     df.show(false)
 
-    //// Read from local.
-    // val df = spark.read.json("file:///home/maria_dev/SparkSamples/resources/employee.json")
+// //     //// Read from local.
+// //     // val df = spark.read.json("file:///home/maria_dev/SparkSamples/resources/employee.json")
 
-    //read multiline json file
-    val multiline_df = spark.read.option("multiline", "true").json("file:///home/maria_dev/SparkSamples/resources/employee_m.json")
-    println("read multiline json file...")
-    multiline_df.show(false)
+//     //read multiline json file
+//     val multiline_df = spark.read.option("multiline", "true").json("file:///home/maria_dev/SparkSamples/resources/employee_m.json")
+//     println("read multiline json file...")
+//     multiline_df.show(false)
 
-    //read multiple files
-    val df2 = spark.read.json("file:///home/maria_dev/SparkSamples/resources/e1.json", "file:///home/maria_dev/SparkSamples/resources/e2.json")
-    println("read multiple files...")
-    df2.show(false)
+//     //read multiple files
+//     val df2 = spark.read.json("file:///home/maria_dev/SparkSamples/resources/e1.json", "file:///home/maria_dev/SparkSamples/resources/e2.json")
+//     println("read multiple files...")
+//     df2.show(false)
 
-    // //read files from a folder.
-    // val df2 = spark.read.json("somefolder")
-    // df2.show(false)
+//     // //read files from a folder.
+//     // val df2 = spark.read.json("somefolder")
+//     // df2.show(false)
 
     //Define custom schema
     println("\nCreating dataframe for zipcodes.json with custom schema...")
@@ -50,7 +50,7 @@ object FromJsonFile {
 .add("LocationType", StringType, true)
 .add("Lat", DoubleType, true)
 .add("Long", DoubleType, true)
-.add("Xaxis", IntegerType, true)
+.add("Xaxis", DoubleType, true)
 .add("Yaxis", DoubleType, true)
 .add("Zaxis", DoubleType, true)
 .add("WorldRegion", StringType, true)
@@ -63,30 +63,31 @@ object FromJsonFile {
 // .add("TotalWages", IntegerType, true)
 // .add("Notes", StringType, true)
 
+    // val df_with_schema = spark.read.schema(schema).json("file:///home/maria_dev/SparkSamples/resources/zipcodes_onerec.json")
     val df_with_schema = spark.read.schema(schema).json("file:///home/maria_dev/SparkSamples/resources/zipcodes.json")
 
     println("zipcodes.json with custom schema...")
     df_with_schema.printSchema()
-    // println("Printing zipcodes.json data...")
-    // df_with_schema.show(false)
+    println("Printing zipcodes.json data...")
+    df_with_schema.show(false)
 
-    // println("Dropping temp view zipcodes...")
-    // spark.catalog.dropTempView("zipcodes")
+  //   // println("Dropping temp view zipcodes...")
+  //   // spark.catalog.dropTempView("zipcodes")
 
-     println("Creating temp view zipcodes...")
-    // Read JSON file using Spark SQL.
-    spark.sqlContext.sql(
-      "CREATE TEMPORARY VIEW zipcodes USING json OPTIONS" + " (path 'file:///home/maria_dev/SparkSamples/resources/zipcodes.json')"
-    )
-    println("Querying temp view zipcodes...")
-    spark.sqlContext.sql("select * from zipcodes").show(false)
-    println("Querying temp view zipcodes for a specific record...")
-    spark.sqlContext.sql("select * from zipcodes where RecordNumber = 61392").show(false)
+  //    println("Creating temp view zipcodes...")
+  //   // Read JSON file using Spark SQL.
+  //   spark.sqlContext.sql(
+  //     "CREATE TEMPORARY VIEW zipcodes USING json OPTIONS" + " (path 'file:///home/maria_dev/SparkSamples/resources/zipcodes.json')"
+  //   )
+  //   println("Querying temp view zipcodes...")
+  //   spark.sqlContext.sql("select * from zipcodes").show(false)
+  //   println("Querying temp view zipcodes for a specific record...")
+  //   spark.sqlContext.sql("select * from zipcodes where RecordNumber = 61392").show(false)
 
-    // Write Spark DataFrame to JSON file.
-    // Will create part* files in the given folder.
-    // Delete the given folder rm -rf /tmp/spark_output/zipcodes
-    println("Writing to /tmp/spark_output/zipcodes...")
-    df2.write.json("file:///tmp/spark_output/zipcodes")
+  //   // Write Spark DataFrame to JSON file.
+  //   // Will create part* files in the given folder.
+  //   // Delete the given folder rm -rf /tmp/spark_output/zipcodes
+  //   println("Writing to /tmp/spark_output/zipcodes...")
+  //   df2.write.json("file:///tmp/spark_output/zipcodes")
   }
 }

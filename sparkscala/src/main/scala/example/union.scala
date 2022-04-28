@@ -1,9 +1,10 @@
+// union.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.UnionExample
 package example
 
-// union.scala
 import org.apache.spark.sql.SparkSession
 
-object UnionExample extends App{
+object UnionExample {// extends App{
 
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")

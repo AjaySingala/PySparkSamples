@@ -1,11 +1,13 @@
 // selectcols.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.SelectCols
+
 package example
 
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types._
 
 object SelectCols {
-  def mainCols(args: Array[String]): Unit = {
+  def main_SelectCols(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession
       .builder()
       .master("local[1]")

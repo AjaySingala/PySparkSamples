@@ -1,10 +1,12 @@
+// drop.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.DropColumn
+
 package example
 
-// drop.scala
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 import org.apache.spark.sql.functions.col
-object DropColumn extends App {
+object DropColumn { // extends App {
 
   val spark:SparkSession = SparkSession.builder()
     .master("local[5]")

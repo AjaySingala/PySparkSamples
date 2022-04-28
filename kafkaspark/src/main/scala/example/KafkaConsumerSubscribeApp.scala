@@ -1,4 +1,6 @@
 // KafkaConsumerSubscribeApp.scala
+// spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.4 consumer.jar --class example.KafkaConsumerSubscribeApp
+
 package example
 
 import java.util.{Collections, Properties}
@@ -7,7 +9,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer
 import scala.collection.JavaConverters._
 
 object KafkaConsumerSubscribeApp {
-  def main_kc(args: Array[String]): Unit = {
+  def main(args: Array[String]): Unit = {
 
     val props: Properties = new Properties()
     props.put("group.id", "test")

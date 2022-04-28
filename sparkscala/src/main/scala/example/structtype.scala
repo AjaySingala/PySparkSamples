@@ -1,4 +1,6 @@
 // structtype.scala
+// spark-submit sparkscala_2.11-0.1.0-SNAPSHOT.jar  --class example.StructTypeDemo
+
 package example
 
 import org.apache.spark.sql.{Row, SparkSession}
@@ -8,7 +10,7 @@ object StructTypeDemo {
   case class Name(first: String, last: String, middle: String)
   case class Employee(fullName: Name, age: Integer, gender: String)
 
-  def mainStruct(args: Array[String]): Unit = {
+  def main_StructTypeDemo(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession
       .builder()
       .master("local[3]")
@@ -47,7 +49,7 @@ object StructTypeDemo {
     df.show()
 
     // Nested StructTypes.
-    println("Nested StrutTypes...")
+    println("Nested StructTypes...")
     println("Defining the data...")
     val structureData = Seq(
       Row(Row("James ", "", "Smith"), "36636", "M", 3100),
@@ -107,7 +109,7 @@ object StructTypeDemo {
       Row(
         Row("Jen", "Mary", "Brown"),
         List("Blogging"),
-        Map("white" -> "black", "eye" -> "black")
+        Map("hair" -> "black", "eye" -> "black")
       )
     )
 
@@ -129,19 +131,20 @@ object StructTypeDemo {
       arrayStructureSchema
     )
     df5.printSchema()
-    df5.show()
+    df5.show(false)
 
-    // Convert case class to Spark StructType.
-    println("Convert case class to Spoark StructType...")
-    import org.apache.spark.sql.catalyst.ScalaReflection
-    import org.apache.spark.sql.Encoders
-    println("Defining schema from case class...")
-    val schema =
-      ScalaReflection.schemaFor[Employee].dataType.asInstanceOf[StructType]
+    // Advanced stuff!!! Not required.
+    // Convert case class to Spark StructType. Reverse Engineering.
+    // // println("Convert case class to Spark StructType...")
+    // // import org.apache.spark.sql.catalyst.ScalaReflection
+    // // import org.apache.spark.sql.Encoders
+    // // println("Defining schema from case class...")
+    // // val schema =
+    // //   ScalaReflection.schemaFor[Employee].dataType.asInstanceOf[StructType]
 
-    println("Encoding the schema...")
-    val encoderSchema = Encoders.product[Employee].schema
-    encoderSchema.printTreeString()
+    // // println("Encoding the schema...")
+    // // val encoderSchema = Encoders.product[Employee].schema
+    // // encoderSchema.printTreeString()
 
   }
 }
