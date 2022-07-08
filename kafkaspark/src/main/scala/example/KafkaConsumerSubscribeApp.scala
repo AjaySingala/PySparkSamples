@@ -12,7 +12,7 @@ object KafkaConsumerSubscribeApp {
   def main_sub(args: Array[String]): Unit = {
 
     val props: Properties = new Properties()
-    props.put("group.id", "test")
+    props.put("group.id", "test")   // $KAFKA_HOME/config/consumer.properties
     // props.put("bootstrap.servers","localhost:9092")
     props.put("bootstrap.servers", "sandbox-hdp.hortonworks.com:6667")
     props.put(

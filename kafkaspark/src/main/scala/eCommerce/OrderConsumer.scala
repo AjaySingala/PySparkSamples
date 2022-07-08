@@ -77,6 +77,7 @@ object OrderConsumer {
                 StructField("ecommerce_website_name", StringType, true),
                 StructField("payment_txn_id", StringType, true),
                 StructField("payment_txn_success", StringType, true),
+                StructField("failure_reason", StringType, true),
                 StructField("transactionTimestamp", TimestampType, true)
             )
         )
@@ -106,13 +107,21 @@ object OrderConsumer {
         .select("tmp.*")
         aggregation.printSchema()
 
-        // println("Write the full data into a sink...")
+        // Write full data to console.
+        // println("Write the full data into a console sink...")
         // val dfOut = aggregation.writeStream
         // .outputMode("update")
         // .option("truncate", false)
         // .format("console")
         // .start()
         // // dfOut.awaitTermination()      
+
+        // Write full data to HDFS as json files.
+        val dfFull = aggregation.writeStream.format("json")
+            .option("path", "/tmp/output/orders/json")
+            .option("checkpointLocation","/tmp/output/orders/json_checkpoint")
+            .outputMode("append")
+            .start()
 
         // // with window().
         // val windows = aggregation
@@ -160,13 +169,13 @@ object OrderConsumer {
             .outputMode("update")
             .option("truncate", false)
             .format("console")
-        //     .start()
+            .start()
 
-        // Write to HDFS as json files.
-        val dfPaymentTypeAmountQueryJson = dfPaymentTypeAmount.writeStream.format("json")
-            .option("path", "/tmp/output/orders/payment_type/json")
-            .option("checkpointLocation","/tmp/output/orders/payment_type/json_checkpoint")
-            .outputMode("append").start()
+        // // Write to HDFS as json files.
+        // val dfPaymentTypeAmountQueryJson = dfPaymentTypeAmount.writeStream.format("json")
+        //     .option("path", "/tmp/output/orders/payment_type/json")
+        //     .option("checkpointLocation","/tmp/output/orders/payment_type/json_checkpoint")
+        //     .outputMode("append").start()
         
         // // Aggregate (without watermark and window) and write to sinks.
         // // Append output mode not supported when there are streaming aggregations on 

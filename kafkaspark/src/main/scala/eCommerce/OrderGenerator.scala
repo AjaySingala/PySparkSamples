@@ -49,13 +49,10 @@ object OrderGenerator {
         val price = product._4
         val paymentTxnId = randomAlphaNumericString(10)
         val status = getRandomItemFromSeq(statuses)
-        var failureReason = ""
+        val failureReason = if(status == "N") getRandomItemFromSeq(failureReasons) else "N/A"
 
         import java.sql.Timestamp
         val time = new Timestamp(System.currentTimeMillis())
-        if(status == "N") {
-            failureReason = getRandomItemFromSeq(failureReasons)
-        }
 
         Domain.OrderRecord(
             order_id = orderId, 
