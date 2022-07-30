@@ -2,6 +2,8 @@
 .bloop
 .bsp
 
+null/
+
 # metals
 project/metals.sbt
 .metals
