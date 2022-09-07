@@ -10,7 +10,7 @@ import org.apache.spark.sql.types._
 object SparkSqlFirst {
   case class Person(name: String, age: Long)
 
-  def main_first(args: Array[String]): Unit = {
+  def main_First(args: Array[String]): Unit = {
 
     val spark = SparkSession
       .builder()
@@ -149,8 +149,9 @@ object SparkSqlFirst {
     peopleDF2.createOrReplaceTempView("people")
 
     // SQL can be run over a temporary view created using DataFrames
-    println("Displayinmg names from view 'people'...")
+    println("Displaying names from view 'people'...")
     val results = spark.sql("SELECT name FROM people")
+    results.show()
 
     // The results of SQL queries are DataFrames and support all the normal RDD operations
     // The columns of a row in the result can be accessed by field index or by field name

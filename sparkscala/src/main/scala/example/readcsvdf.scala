@@ -5,9 +5,10 @@ package example
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
+import org.apache.spark.sql.SaveMode
 
 object FromCSVFile {
-  def main_FromCSVFile(args: Array[String]): Unit = {
+  def main_csv(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession
       .builder()
       .master("local[3]")
@@ -33,11 +34,11 @@ object FromCSVFile {
     df2.printSchema()
     df2.show()
 
-// // // Read multiple CSV files.
-// // val df = spark.read.csv("path1,path2,path3")
+// // // // Read multiple CSV files.
+// // // val df = spark.read.csv("path1,path2,path3")
 
-// // // Read all CSV files in a directory.
-// // val df3 = spark.read.csv("Folder path")
+// // // // Read all CSV files in a directory.
+// // // val df3 = spark.read.csv("Folder path")
 
 // Read CSV file with delimeter.
     println("\nRead csv file into a DF specifying a delimiter...")
@@ -64,8 +65,8 @@ object FromCSVFile {
       .add("City", StringType, true)
       .add("State", StringType, true)
       .add("LocationType", StringType, true)
-      .add("Lat", DoubleType, true)
-      .add("Long", DoubleType, true)
+      .add("Latitude", DoubleType, true)
+      .add("Longitude", DoubleType, true)
       .add("Xaxis", DoubleType, true)
       .add("Yaxis", DoubleType, true)
       .add("Zaxis", DoubleType, true)
@@ -94,11 +95,12 @@ object FromCSVFile {
       .csv("file:///tmp/spark_output/zipcodes")
 
 // // Write mode samples:
-// // df2.write.mode(SaveMode.Append).csv("/tmp/spark_output/zipcodes")
-// // df2.write.mode(SaveMode.Overwrite).csv("/tmp/spark_output/zipcodes")
-// // df2.write.mode(SaveMode.Ignore).csv("/tmp/spark_output/zipcodes")
-// // df2.write.mode(SaveMode.ErrorIfExists).csv("/tmp/spark_output/zipcodes")
+// // Make sure there is import org.apache.spark.sql.SaveMode.
+// df2.write.mode(SaveMode.Append).csv("/tmp/spark_output/zipcodes")
+// df2.write.mode(SaveMode.Overwrite).csv("/tmp/spark_output/zipcodes")
+// df2.write.mode(SaveMode.Ignore).csv("/tmp/spark_output/zipcodes")
+// df2.write.mode(SaveMode.ErrorIfExists).csv("/tmp/spark_output/zipcodes")
 
-    df4.write.mode("append").csv("file:///tmp/spark_output/zipcodes")
+//     df4.write.mode("append").csv("file:///tmp/spark_output/zipcodes")
    }
 }

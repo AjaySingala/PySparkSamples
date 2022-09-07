@@ -1,14 +1,11 @@
-# broadcast_pysparksql.py
-# Does not work with spark-submit. Works from pyspark shell.
+# broadcast_2.py
 
-import pyspark
-from pyspark.sql import SparkSession
-
-spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
-spark.SparkContext.setLogLevel("ERROR")
+from pyspark import SparkContext 
+sc = SparkContext("local", "Broadcast-2 app") 
+sc.setLogLevel("ERROR")
 
 states = {"NY":"New York", "CA":"California", "FL":"Florida"}
-broadcastStates = spark.sparkContext.broadcast(states)
+broadcastStates = sc.broadcast(states)
 
 data = [("James","Smith","USA","CA"),
     ("Michael","Rose","USA","NY"),
@@ -16,7 +13,7 @@ data = [("James","Smith","USA","CA"),
     ("Maria","Jones","USA","FL")
   ]
 
-rdd = spark.SparkContext.parallelize(data)
+rdd = sc.parallelize(data)
 
 def state_convert(code):
     return broadcastStates.value[code]
@@ -25,5 +22,4 @@ print('-' * 50)
 print("result...")
 result = rdd.map(lambda x: (x[0],x[1],x[2],state_convert(x[3]))).collect()
 print(result)
-# result.show(truncate=False)
 print('-' * 50)

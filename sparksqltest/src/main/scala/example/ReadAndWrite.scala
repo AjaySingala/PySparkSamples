@@ -31,7 +31,6 @@ object ReadAndWrite {
     df.write
       .option("delimiter", delimiter)
       .option("header", header)
-      .mode(SaveMode.Overwrite)
       .format("csv")
       .save(locationPath + "/" + oDate + "/")
   }

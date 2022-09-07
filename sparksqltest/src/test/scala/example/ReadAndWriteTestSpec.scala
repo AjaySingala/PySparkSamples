@@ -22,7 +22,7 @@ object Filters {
   }
 }
 
-class ReadAndWriteTestSpec extends FunSuite with BeforeAndAfterEach{
+class ReadAndWriteTestSpec extends FunSuite with BeforeAndAfterEach {
 
   private val master = "local"
 

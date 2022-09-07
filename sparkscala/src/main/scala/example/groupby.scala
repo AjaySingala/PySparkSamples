@@ -5,7 +5,7 @@ package example
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
-object GroupbyExample { //extends App {
+object GroupbyExample { // extends App {
   val spark: SparkSession = SparkSession.builder()
     .master("local[1]")
     .appName("AjaySingala.com")
@@ -87,6 +87,7 @@ object GroupbyExample { //extends App {
       avg("salary").as("avg_salary"),
       sum("bonus").as("sum_bonus"),
       stddev("bonus").as("stddev_bonus"))
-    .where(col("sum_bonus") > 50000)
+    //.where(col("sum_bonus") > 50000)          // Equivalent to HAVING in SQL.
+    .where("sum_bonus > 50000")                 // Equivalent to HAVING in SQL.
     .show(false)
 }

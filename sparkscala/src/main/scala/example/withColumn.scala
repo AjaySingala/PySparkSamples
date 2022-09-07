@@ -8,7 +8,7 @@ import org.apache.spark.sql.types.{StringType, StructType}
 import org.apache.spark.sql.functions._
 object WithColumn {
 
-  def main_WithColumn(args:Array[String]):Unit= {
+  def main_WithCol(args:Array[String]):Unit= {
 
     val spark: SparkSession = SparkSession.builder()
       .master("local[1]")
@@ -42,7 +42,8 @@ object WithColumn {
 
     //Change the column data type
     println("Change data type of 'salary'...")
-    val df3 = df2.withColumn("salary",df2("salary").cast("Integer"))
+    //val df3 = df2.withColumn("salary",df2("salary").cast("Integer"))
+    val df3 = df2.withColumn("salary", col("salary").cast("Integer"))
     df3.printSchema()
     df3.show()
 
@@ -77,35 +78,35 @@ object WithColumn {
     dflit.printSchema()
     dflit.show()
 
-    // //Retrieving
-    // df2.show(false)
-    // df2.select("name").show(false)
-    // df2.select("name.firstname").show(false)
-    // df2.select("name.*").show(false)
+    // // //Retrieving
+    // // df2.show(false)
+    // // df2.select("name").show(false)
+    // // df2.select("name.firstname").show(false)
+    // // df2.select("name.*").show(false)
 
-    println("Use 'SELECT' statement on tempo view 'PERSON' for df2...")
-    df2.createOrReplaceTempView("PERSON")
-    spark.sql("SELECT salary*100 as salary, salary*-1 as CopiedColumn, 'USA' as country FROM PERSON").show()
+    // println("Use 'SELECT' statement on tempo view 'PERSON' for df2...")
+    // df2.createOrReplaceTempView("PERSON")
+    // spark.sql("SELECT salary*100 as salary, salary*-1 as CopiedColumn, 'USA' as country FROM PERSON").show()
 
-    import spark.implicits._
+    // import spark.implicits._
 
-    println("Define new data for name and address...")
-    val columns = Seq("name","address")
-    val data = Seq(("Robert, Smith", "1 Main st, Newark, NJ, 92537"), ("Maria, Garcia","3456 Walnut st, Newark, NJ, 94732"))
-    var dfFromData = spark.createDataFrame(data).toDF(columns:_*)
-    dfFromData.printSchema()
+    // println("Define new data for name and address...")
+    // val columns = Seq("name","address")
+    // val data = Seq(("Robert, Smith", "1 Main st, Newark, NJ, 92537"), ("Maria, Garcia","3456 Walnut st, Newark, NJ, 94732"))
+    // var dfFromData = spark.createDataFrame(data).toDF(columns:_*)
+    // dfFromData.printSchema()
 
-    println("Split the names and addresses...")
-    val newDF = dfFromData.map(f=>{
-      val nameSplit = f.getAs[String](0).split(",")
-      val addSplit = f.getAs[String](1).split(",")
-      (nameSplit(0),nameSplit(1),addSplit(0),addSplit(1),addSplit(2),addSplit(3))
-    })
+    // println("Split the names and addresses...")
+    // val newDF = dfFromData.map(f=>{
+    //   val nameSplit = f.getAs[String](0).split(",")
+    //   val addSplit = f.getAs[String](1).split(",")
+    //   (nameSplit(0),nameSplit(1),addSplit(0),addSplit(1),addSplit(2),addSplit(3))
+    // })
 
-    println("Create new DF from the split values with final schema...")
-    val finalDF = newDF.toDF("First Name","Last Name","Address Line1","City","State","zipCode")
-    finalDF.printSchema()
-    finalDF.show(false)
+    // println("Create new DF from the split values with final schema...")
+    // val finalDF = newDF.toDF("First Name","Last Name","Address Line1","City","State","zipCode")
+    // finalDF.printSchema()
+    // finalDF.show(false)
   }
 }
 

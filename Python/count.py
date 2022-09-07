@@ -1,3 +1,4 @@
+# count.py
 from pyspark import SparkContext
 sc = SparkContext("local", "count app")
 words = sc.parallelize (
@@ -11,5 +12,7 @@ words = sc.parallelize (
    "pyspark and spark"]
 )
 counts = words.count()
+print('-' * 50)
 print("Number of elements in RDD -> %i" % (counts))
+print('-' * 50)
 

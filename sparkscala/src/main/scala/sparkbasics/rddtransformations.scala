@@ -1,18 +1,20 @@
+// rddtransformations.scala 
+// spark-submit ./sparkscala_2.11-0.1.0-SNAPSHOT.jar --class sparkbasics.WordCountExample
 package sparkbasics
 
-// rddtransformations.scala 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 
 object WordCountExample {
 
-  def mainWordCount(args:Array[String]): Unit = {
+  def main_wordcount(args:Array[String]): Unit = {
 
     val spark:SparkSession = SparkSession.builder()
       .master("local[3]")
       .appName("ajaysingala.com")
       .getOrCreate()
 
+    spark.sparkContext.setLogLevel("ERROR")
     val sc = spark.sparkContext
 
     val rdd:RDD[String] = sc.textFile("file:///home/maria_dev/SparkSamples/resources/spark_test.txt")

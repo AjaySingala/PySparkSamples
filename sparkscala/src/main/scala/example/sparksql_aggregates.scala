@@ -16,6 +16,8 @@ object SparkSqlAggregates {
     spark.sparkContext.setLogLevel("ERROR")
     val sc = spark.sparkContext
 
+    import spark.implicits._    // Required
+
     println("Defining the data...")
     val simpleData = Seq(
       ("James", "Sales", 3000),

@@ -1,3 +1,4 @@
+# filter.py
 from pyspark import SparkContext
 sc = SparkContext("local", "Filter app")
 words = sc.parallelize (
@@ -12,5 +13,6 @@ words = sc.parallelize (
 )
 words_filter = words.filter(lambda x: 'spark' in x)
 filtered = words_filter.collect()
+print('-' * 50)
 print("Fitered RDD -> %s" % (filtered))
-
+print('-' * 50)

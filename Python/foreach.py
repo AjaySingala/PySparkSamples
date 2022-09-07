@@ -1,3 +1,4 @@
+# foreach.py
 from pyspark import SparkContext
 sc = SparkContext("local", "ForEach app")
 words = sc.parallelize (
@@ -11,4 +12,6 @@ words = sc.parallelize (
    "pyspark and spark"]
 )
 def f(x): print(x)
+print('-' * 50)
 fore = words.foreach(f) 
+print('-' * 50)
