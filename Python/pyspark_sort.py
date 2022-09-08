@@ -4,6 +4,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, asc,desc
 
 spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 simpleData = [("James","Sales","NY",90000,34,10000), \
     ("Michael","Sales","NY",86000,56,20000), \

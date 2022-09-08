@@ -1,6 +1,7 @@
 # pyspark_foreach.py
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 # Create a dataframe.
 data = [('James','Smith','M',30),('Anna','Rose','F',41),

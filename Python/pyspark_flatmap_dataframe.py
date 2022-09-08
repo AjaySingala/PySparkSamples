@@ -2,6 +2,7 @@
 import pyspark
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName('ajaysingala').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 arrayData = [
         ('James',['Java','Scala'],{'hair':'black','eye':'brown'}),

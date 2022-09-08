@@ -3,6 +3,7 @@ import pyspark
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 dept = [("Finance",10), \
     ("Marketing",20), \

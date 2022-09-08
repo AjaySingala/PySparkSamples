@@ -5,6 +5,7 @@ from pyspark.sql.types import StructType,StructField, StringType, IntegerType, A
 from pyspark.sql.functions import col,array_contains
 
 spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 arrayStructureData = [
         (("James","","Smith"),["Java","Scala","C++"],"OH","M"),

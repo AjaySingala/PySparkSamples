@@ -5,6 +5,7 @@ from pyspark.sql.types import StructType,StructField, StringType, IntegerType
 from pyspark.sql.functions import *
 
 spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 dataDF = [(('James','','Smith'),'1991-04-01','M',3000),
   (('Michael','Rose',''),'2000-05-19','M',4000),

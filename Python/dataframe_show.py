@@ -1,6 +1,8 @@
 # dataframe_show.py
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
+
 columns = ["Seqno","Quote"]
 data = [("1", "Be the change that you wish to see in the world"),
     ("2", "Everyone thinks of changing the world, but no one thinks of changing himself."),

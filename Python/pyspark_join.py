@@ -4,6 +4,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 
 spark = SparkSession.builder.appName('ajaysingala.com').getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 emp = [(1,"Smith",-1,"2018","10","M",3000), \
     (2,"Rose",1,"2010","20","M",4000), \
